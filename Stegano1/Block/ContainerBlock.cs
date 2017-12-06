@@ -2,16 +2,34 @@
 
 namespace Stegano.Block
 {
-    abstract class ContainerBlock
+    abstract class ContainerBlock : GUI
     {
         public PixelPicture container;
         public int beginX, beginY, endX, endY;
 
         public abstract int getBlockSize();
 
-        public abstract Color getCellInBlock(int x, int y);
+        public abstract int NumberOfBlock();
 
-        public abstract void setCellInBlock(int x, int y, Color cell);
+        public virtual Color getCellInBlock(int x, int y)
+        {
+            return container.GetCell(x, y);
+        }
+
+        public virtual void setCellInBlock(int x, int y, Color color)
+        {
+            container.SetCell(x, y, color);
+        }
+
+        public virtual Color getCellInBlock(int n)
+        {
+            return container.GetCell(n);
+        }
+
+        public virtual void setCellInBlock(int n, Color color)
+        {
+            container.SetCell(n, color);
+        }
 
         public virtual void SetContainer(PixelPicture container)
         {
@@ -22,16 +40,5 @@ namespace Stegano.Block
         {
             return container;
         }
-
-        public abstract int NumberOfBlock();
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public abstract string StandartParameters();
-
-        public abstract bool ParametersReader(string parameters);
     }
 }

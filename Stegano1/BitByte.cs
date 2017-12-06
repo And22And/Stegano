@@ -45,12 +45,12 @@ namespace Stegano
 
         public static byte[] BytesFromString(string str)
         {
-            return Encoding.ASCII.GetBytes(str);
+            return Encoding.Unicode.GetBytes(str);
         }
 
         public static string BytesToString(byte[] bytes)
         {
-            return Encoding.ASCII.GetString(bytes);            
+            return Encoding.Unicode.GetString(bytes);            
         }
 
         public static int IntFromBits(BitArray array) 
@@ -88,6 +88,27 @@ namespace Stegano
             Console.WriteLine(number);
             //byte[] bytes = BitConverter.GetBytes(number);
             return BytesToBits(BytesFromInt(number));
+        }
+
+        public static byte BitsToByte(BitArray array, int begin, int numberOfBit)
+        {
+            byte result = 0;
+            for (int i = 0; i < numberOfBit; i++)
+            {
+                if (begin + i < array.Length)
+                {
+                    result += (byte)((array.Get(begin + i) ? 1 : 0) * BitByte.powerOfTwo(i));
+                }
+            }
+            return result;
+        }
+
+        public static void writeBitArray(BitArray array, int position, int color, int numberOfBit)
+        {
+            for (int i = 0; i < numberOfBit; i++)
+            {
+                array.Set(position + i, (color / BitByte.powerOfTwo(i)) % 2 == 0 ? false : true);
+            }
         }
     }
 }

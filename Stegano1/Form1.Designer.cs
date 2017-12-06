@@ -38,14 +38,14 @@
             this.resultText = new System.Windows.Forms.RichTextBox();
             this.spaceLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.writerParameter = new System.Windows.Forms.ComboBox();
+            this.positionParameter = new System.Windows.Forms.ComboBox();
+            this.orderParameter = new System.Windows.Forms.ComboBox();
+            this.blockParameter = new System.Windows.Forms.ComboBox();
             this.errorText = new System.Windows.Forms.RichTextBox();
-            this.writerParameter = new System.Windows.Forms.TextBox();
             this.writerHint = new System.Windows.Forms.RichTextBox();
-            this.positionParameter = new System.Windows.Forms.TextBox();
             this.positionHint = new System.Windows.Forms.RichTextBox();
-            this.orderParameter = new System.Windows.Forms.TextBox();
             this.orderHint = new System.Windows.Forms.RichTextBox();
-            this.blockParameter = new System.Windows.Forms.TextBox();
             this.blockHint = new System.Windows.Forms.RichTextBox();
             this.writerLabel = new System.Windows.Forms.Label();
             this.writerList = new System.Windows.Forms.ComboBox();
@@ -171,14 +171,14 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.errorText);
             this.groupBox2.Controls.Add(this.writerParameter);
-            this.groupBox2.Controls.Add(this.writerHint);
             this.groupBox2.Controls.Add(this.positionParameter);
-            this.groupBox2.Controls.Add(this.positionHint);
             this.groupBox2.Controls.Add(this.orderParameter);
-            this.groupBox2.Controls.Add(this.orderHint);
             this.groupBox2.Controls.Add(this.blockParameter);
+            this.groupBox2.Controls.Add(this.errorText);
+            this.groupBox2.Controls.Add(this.writerHint);
+            this.groupBox2.Controls.Add(this.positionHint);
+            this.groupBox2.Controls.Add(this.orderHint);
             this.groupBox2.Controls.Add(this.blockHint);
             this.groupBox2.Controls.Add(this.writerLabel);
             this.groupBox2.Controls.Add(this.writerList);
@@ -194,6 +194,42 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             // 
+            // writerParameter
+            // 
+            this.writerParameter.FormattingEnabled = true;
+            this.writerParameter.Location = new System.Drawing.Point(9, 339);
+            this.writerParameter.Name = "writerParameter";
+            this.writerParameter.Size = new System.Drawing.Size(197, 21);
+            this.writerParameter.TabIndex = 20;
+            this.writerParameter.SelectedIndexChanged += new System.EventHandler(this.writerParameter_SelectedIndexChanged);
+            // 
+            // positionParameter
+            // 
+            this.positionParameter.FormattingEnabled = true;
+            this.positionParameter.Location = new System.Drawing.Point(9, 232);
+            this.positionParameter.Name = "positionParameter";
+            this.positionParameter.Size = new System.Drawing.Size(197, 21);
+            this.positionParameter.TabIndex = 19;
+            this.positionParameter.SelectedIndexChanged += new System.EventHandler(this.positionParameter_SelectedIndexChanged);
+            // 
+            // orderParameter
+            // 
+            this.orderParameter.FormattingEnabled = true;
+            this.orderParameter.Location = new System.Drawing.Point(10, 136);
+            this.orderParameter.Name = "orderParameter";
+            this.orderParameter.Size = new System.Drawing.Size(197, 21);
+            this.orderParameter.TabIndex = 18;
+            this.orderParameter.SelectedIndexChanged += new System.EventHandler(this.orderParameter_SelectedIndexChanged);
+            // 
+            // blockParameter
+            // 
+            this.blockParameter.FormattingEnabled = true;
+            this.blockParameter.Location = new System.Drawing.Point(10, 40);
+            this.blockParameter.Name = "blockParameter";
+            this.blockParameter.Size = new System.Drawing.Size(197, 21);
+            this.blockParameter.TabIndex = 17;
+            this.blockParameter.SelectedIndexChanged += new System.EventHandler(this.blockParameter_SelectedIndexChanged);
+            // 
             // errorText
             // 
             this.errorText.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -207,14 +243,6 @@
             this.errorText.TabIndex = 16;
             this.errorText.Text = "";
             // 
-            // writerParameter
-            // 
-            this.writerParameter.Location = new System.Drawing.Point(8, 340);
-            this.writerParameter.Name = "writerParameter";
-            this.writerParameter.Size = new System.Drawing.Size(198, 20);
-            this.writerParameter.TabIndex = 15;
-            this.writerParameter.TextChanged += new System.EventHandler(this.writerParameter_TextChanged);
-            // 
             // writerHint
             // 
             this.writerHint.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -226,14 +254,6 @@
             this.writerHint.Size = new System.Drawing.Size(200, 36);
             this.writerHint.TabIndex = 14;
             this.writerHint.Text = "";
-            // 
-            // positionParameter
-            // 
-            this.positionParameter.Location = new System.Drawing.Point(9, 239);
-            this.positionParameter.Name = "positionParameter";
-            this.positionParameter.Size = new System.Drawing.Size(197, 20);
-            this.positionParameter.TabIndex = 13;
-            this.positionParameter.TextChanged += new System.EventHandler(this.positionParameter_TextChanged);
             // 
             // positionHint
             // 
@@ -247,14 +267,6 @@
             this.positionHint.TabIndex = 12;
             this.positionHint.Text = "";
             // 
-            // orderParameter
-            // 
-            this.orderParameter.Location = new System.Drawing.Point(9, 137);
-            this.orderParameter.Name = "orderParameter";
-            this.orderParameter.Size = new System.Drawing.Size(197, 20);
-            this.orderParameter.TabIndex = 11;
-            this.orderParameter.TextChanged += new System.EventHandler(this.orderParameter_TextChanged);
-            // 
             // orderHint
             // 
             this.orderHint.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -266,14 +278,6 @@
             this.orderHint.Size = new System.Drawing.Size(199, 36);
             this.orderHint.TabIndex = 10;
             this.orderHint.Text = "";
-            // 
-            // blockParameter
-            // 
-            this.blockParameter.Location = new System.Drawing.Point(9, 38);
-            this.blockParameter.Name = "blockParameter";
-            this.blockParameter.Size = new System.Drawing.Size(197, 20);
-            this.blockParameter.TabIndex = 9;
-            this.blockParameter.TextChanged += new System.EventHandler(this.blockParameter_TextChanged);
             // 
             // blockHint
             // 
@@ -386,7 +390,6 @@
         private System.Windows.Forms.Button choseFileBut;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox blockParameter;
         private System.Windows.Forms.RichTextBox blockHint;
         private System.Windows.Forms.Label writerLabel;
         private System.Windows.Forms.ComboBox writerList;
@@ -396,15 +399,16 @@
         private System.Windows.Forms.ComboBox orderList;
         private System.Windows.Forms.Label BlockLabel;
         private System.Windows.Forms.ComboBox blockList;
-        private System.Windows.Forms.TextBox writerParameter;
         private System.Windows.Forms.RichTextBox writerHint;
-        private System.Windows.Forms.TextBox positionParameter;
         private System.Windows.Forms.RichTextBox positionHint;
-        private System.Windows.Forms.TextBox orderParameter;
         private System.Windows.Forms.RichTextBox orderHint;
         private System.Windows.Forms.Label spaceLabel;
         private System.Windows.Forms.RichTextBox errorText;
         private System.Windows.Forms.RichTextBox resultText;
+        private System.Windows.Forms.ComboBox writerParameter;
+        private System.Windows.Forms.ComboBox positionParameter;
+        private System.Windows.Forms.ComboBox orderParameter;
+        private System.Windows.Forms.ComboBox blockParameter;
     }
 }
 

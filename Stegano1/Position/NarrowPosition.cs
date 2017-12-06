@@ -20,15 +20,5 @@ namespace Stegano.Position
         {
             return currentPosition++;
         }
-
-        public override bool ParametersReader(string parameters)
-        {
-            return true;
-        }
-
-        public override string StandartParameters()
-        {
-            return "";
-        }
     }
 }

@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Stegano.Order
 {
-    abstract class CellOrder
+    abstract class CellOrder : GUI
     {
         public ContainerBlock block;
 
@@ -24,15 +24,6 @@ namespace Stegano.Order
         public virtual PixelPicture GetContainer()
         {
             return block.GetContainer();
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public abstract string StandartParameters();
-
-        public abstract bool ParametersReader(string parameters);
+        }        
     }
 }

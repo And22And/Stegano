@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Stegano
 {
-    class PixelPicture:Container
+    class PixelPicture
     {
         public Bitmap image;
 
@@ -12,27 +12,27 @@ namespace Stegano
             this.image = image;
         }
 
-        public override int getCellNumber()
+        public int getCellNumber()
         {
             return image.Width * image.Height;
         }
 
-        public override Color GetCell(int n)
+        public Color GetCell(int n)
         {
             return image.GetPixel(n % image.Width, n / image.Width);
         }
 
-        public override void SetCell(int n, Color color)
+        public void SetCell(int n, Color color)
         {
             image.SetPixel(n % image.Width, n / image.Width, color);            
         }
 
-        public override Color GetCell(int x, int y)
+        public Color GetCell(int x, int y)
         {
             return image.GetPixel(x, y);
         }
 
-        public override void SetCell(int x, int y, Color color)
+        public void SetCell(int x, int y, Color color)
         {
             image.SetPixel(x, y, color);
         }

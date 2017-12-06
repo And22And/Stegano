@@ -7,8 +7,8 @@
     <ProjectGuid>{32C8AFD1-440E-42AE-8885-BD82165BEBA4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stegano1</RootNamespace>
-    <AssemblyName>Stegano1</AssemblyName>
+    <RootNamespace>Stegano</RootNamespace>
+    <AssemblyName>Stegano</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,11 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitByte.cs" />
+    <Compile Include="GUI.cs" />
     <Compile Include="Order\CasualOrder.cs" />
+    <Compile Include="ParametersGenerator.cs" />
     <Compile Include="Position\NarrowPosition.cs" />
     <Compile Include="Order\CellOrder.cs" />
     <Compile Include="Position\CellPosition.cs" />
-    <Compile Include="Container.cs" />
     <Compile Include="Block\ContainerBlock.cs" />
     <Compile Include="Reflection.cs" />
     <Compile Include="WriterReader\ContainerWriterReader.cs" />
@@ -64,6 +65,7 @@
     </Compile>
     <Compile Include="Block\FullBlock.cs" />
     <Compile Include="HideFile.cs" />
+    <Compile Include="WriterReader\HideInColor.cs" />
     <Compile Include="WriterReader\LeastSignificantBit.cs" />
     <Compile Include="PixelPicture.cs" />
     <Compile Include="Program.cs" />

@@ -8,15 +8,15 @@ using System.Text;
 
 namespace Stegano.WriterReader
 {
-    abstract class ContainerWriterReader
+    abstract class ContainerWriterReader : GUI
     {
         public CellPosition position;
 
         public abstract int BitsPerCell();
 
-        public abstract Color ColorWrite(BitArray data, int position, Color color);
-
         public abstract BitArray ColorRead(Color color);
+
+        public abstract Color ColorWrite(BitArray data, int position, Color color);
 
         public void SetPosition(CellPosition position)
         {
@@ -97,15 +97,6 @@ namespace Stegano.WriterReader
         public long getAvaliableSpace()
         {
             return BitsPerCell() * GetPosition().GetPositionsPerBlock() * GetBlock().NumberOfBlock();
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public abstract string StandartParameters();
-
-        public abstract bool ParametersReader(string parameters);
+        }        
     }
 }

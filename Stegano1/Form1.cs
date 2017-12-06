@@ -29,6 +29,10 @@ namespace Stegano
             orderNames = Reflection.GetTypesNames(orderClass);
             positionNames = Reflection.GetTypesNames(positionClass);
             writerNames = Reflection.GetTypesNames(writerClass);
+            writerReader = (ContainerWriterReader)Reflection.CreateObjectByName(writerNames[0]);
+            writerReader.SetPosition((CellPosition)Reflection.CreateObjectByName(positionNames[0]));
+            writerReader.GetPosition().SetOrder((CellOrder)Reflection.CreateObjectByName(orderNames[0]));
+            writerReader.GetOrder().SetBlock((ContainerBlock)Reflection.CreateObjectByName(blockNames[0]));
 
             //order of next lines must be the same 
             setList(writerList, writerNames);
@@ -48,13 +52,24 @@ namespace Stegano
             box.SelectedIndex = 0;
         }
 
+        private void setParameters(ComboBox box, string[] names)
+        {
+            box.Items.Clear();
+            for (int i = 0; i < names.Length; i++)
+            {
+                box.Items.Add(names[i]);
+            }
+            box.SelectedIndex = 0;
+        }
+
         private void showSpaceValues()
         {
             long needed = 0;
             long avaliable = 0;
+            FileInfo info = new FileInfo(chosenFileName.Text);
             if (chosenFileName.Text.Length != 0)
             {
-                needed = new FileInfo(chosenFileName.Text).Length * 8;
+                needed = info.Length * 8 + 64 + info.Name.Length * 16;
             }
             if (pictureBox1.Image != null)
             {
@@ -127,27 +142,10 @@ namespace Stegano
             ComboBox box = (ComboBox)sender;
             Console.WriteLine(blockNames[box.SelectedIndex]);
             ContainerBlock newBlock = (ContainerBlock)Reflection.CreateObjectByName(blockNames[box.SelectedIndex]);
-            if (writerReader.GetBlock() != null)
-            {
-                newBlock.SetContainer(writerReader.GetContainer());
-            }
-            else
-            {
-                newBlock.SetContainer(null);
-            }
-            newBlock.ParametersReader(newBlock.StandartParameters());
-            blockHint.Text = newBlock.HintString();
-            if (newBlock.StandartParameters().Equals(""))
-            {
-                blockParameter.Enabled = false;
-            }
-            if (writerReader.GetBlock() != null)
-            {
-                writerReader.GetOrder().SetBlock(newBlock);
-                showSpaceValues();
-            }
+            newBlock.SetContainer(writerReader.GetContainer());
             writerReader.GetOrder().SetBlock(newBlock);
-            blockParameter.Text = newBlock.StandartParameters();
+            SetGUI(newBlock, blockParameter, blockHint);
+            showSpaceValues();
         }
 
         private void orderList_SelectedIndexChanged(object sender, EventArgs e)
@@ -155,27 +153,10 @@ namespace Stegano
             ComboBox box = (ComboBox)sender;
             Console.WriteLine(orderNames[box.SelectedIndex]);
             CellOrder newOrder = (CellOrder)Reflection.CreateObjectByName(orderNames[box.SelectedIndex]);
-            if (writerReader.GetOrder() != null)
-            {
-                newOrder.SetBlock(writerReader.GetBlock());
-            }
-            else
-            {
-                newOrder.SetBlock(null);
-            }
-            newOrder.ParametersReader(newOrder.StandartParameters());
-            orderHint.Text = newOrder.HintString();
-            if (newOrder.StandartParameters().Equals(""))
-            {
-                orderParameter.Enabled = false;
-            }
-            if (writerReader.GetOrder() != null)
-            {
-                writerReader.GetPosition().SetOrder(newOrder);
-                showSpaceValues();
-            }
+            newOrder.SetBlock(writerReader.GetBlock());
             writerReader.GetPosition().SetOrder(newOrder);
-            orderParameter.Text = newOrder.StandartParameters();
+            SetGUI(newOrder, orderParameter, orderHint);
+            showSpaceValues();
         }
 
         private void positionList_SelectedIndexChanged(object sender, EventArgs e)
@@ -183,27 +164,10 @@ namespace Stegano
             ComboBox box = (ComboBox)sender;
             Console.WriteLine(positionNames[box.SelectedIndex]);
             CellPosition newPosition = (CellPosition)Reflection.CreateObjectByName(positionNames[box.SelectedIndex]);
-            if (writerReader.GetPosition() != null)
-            {
-                newPosition.SetOrder(writerReader.GetOrder());
-            }
-            else
-            {
-                newPosition.SetOrder(null);
-            }
-            newPosition.ParametersReader(newPosition.StandartParameters());
-            positionHint.Text = newPosition.HintString();
-            if (newPosition.StandartParameters().Equals(""))
-            {
-                positionParameter.Enabled = false;
-            }
-            if (writerReader.GetPosition() != null)
-            {
-                writerReader.SetPosition(newPosition);
-                showSpaceValues();
-            }
+            newPosition.SetOrder(writerReader.GetOrder());
             writerReader.SetPosition(newPosition);
-            positionParameter.Text = newPosition.StandartParameters();
+            SetGUI(newPosition, positionParameter, positionHint);
+            showSpaceValues();
         }
 
         private void writerList_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,78 +175,53 @@ namespace Stegano
             ComboBox box = (ComboBox)sender;
             Console.WriteLine(writerNames[box.SelectedIndex]);
             ContainerWriterReader newWriterReader = (ContainerWriterReader)Reflection.CreateObjectByName(writerNames[box.SelectedIndex]);
-            if (writerReader != null)
-            {
-                newWriterReader.SetPosition(writerReader.GetPosition());
-            }
-            else
-            {
-                newWriterReader.SetPosition(null);
-            }
-            newWriterReader.ParametersReader(newWriterReader.StandartParameters());
-            writerHint.Text = newWriterReader.HintString();
-            if(newWriterReader.StandartParameters().Equals(""))
-            {
-                writerParameter.Enabled = false;
-            }
-            if (writerReader != null)
-            {
-                writerReader = newWriterReader;
-                showSpaceValues();
-            }
+            newWriterReader.SetPosition(writerReader.GetPosition());
             writerReader = newWriterReader;
-            writerParameter.Text = newWriterReader.StandartParameters();
-        }
-
-        private void blockParameter_TextChanged(object sender, EventArgs e)
+            SetGUI(newWriterReader, writerParameter, writerHint);
+            showSpaceValues();           
+        } 
+        
+        private void SetGUI(GUI gui, ComboBox parameters, RichTextBox hint)
         {
-            if(!writerReader.GetBlock().ParametersReader(blockParameter.Text))
+            if (gui.HasParameters())
             {
-                errorText.Text = "Block parameters is not right. Please change them";
-            } else
-            {
-                showSpaceValues();
-                errorText.Text = "";
-            }
-        }
-
-        private void orderParameter_TextChanged(object sender, EventArgs e)
-        {
-            if (!writerReader.GetOrder().ParametersReader(orderParameter.Text))
-            {
-                errorText.Text = "Order parameters is not right. Please change them";
+                setParameters(parameters, gui.AllParameters());
+                gui.ParametersReader(parameters.SelectedItem.ToString());
+                hint.Text = gui.HintString();
             }
             else
             {
-                showSpaceValues();
-                errorText.Text = "";
+                parameters.Enabled = false;
             }
+        }      
+
+        private void blockParameter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectParameter(writerReader.GetBlock(), (ComboBox)sender);
         }
 
-        private void positionParameter_TextChanged(object sender, EventArgs e)
+        private void orderParameter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!writerReader.GetPosition().ParametersReader(positionParameter.Text))
-            {
-                errorText.Text = "Position parameters is not right. Please change them";
-            }
-            else
-            {
-                showSpaceValues();
-                errorText.Text = "";
-            }
+            SelectParameter(writerReader.GetOrder(), (ComboBox)sender);            
         }
 
-        private void writerParameter_TextChanged(object sender, EventArgs e)
+        private void positionParameter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!writerReader.ParametersReader(writerParameter.Text))
+            SelectParameter(writerReader.GetPosition(), (ComboBox)sender);
+        }
+
+        private void writerParameter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectParameter(writerReader, (ComboBox)sender);
+        }
+
+        private void SelectParameter(GUI type, ComboBox sender)
+        {
+            if (type.HasParameters())
             {
-                errorText.Text = "Writer parameters is not right. Please change them";
+                type.ParametersReader(sender.SelectedItem.ToString());
             }
-            else
-            {
-                showSpaceValues();
-                errorText.Text = "";
-            }
+            showSpaceValues();
         }
     }
 

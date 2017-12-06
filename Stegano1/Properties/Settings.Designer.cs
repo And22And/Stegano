@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Stegano1.Properties {
+namespace Stegano.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

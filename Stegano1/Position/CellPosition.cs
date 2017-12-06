@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace Stegano.Position
 {
-    abstract class CellPosition
+    abstract class CellPosition : GUI
     {
         public CellOrder order;
         public int currentPosition;
@@ -53,15 +53,6 @@ namespace Stegano.Position
         public virtual PixelPicture GetContainer()
         {
             return order.GetContainer();
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public abstract string StandartParameters();
-
-        public abstract bool ParametersReader(string parameters);
+        }        
     }
 }

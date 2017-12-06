@@ -37,19 +37,19 @@ namespace Stegano.Block
             container.SetCell(x, y, color);
         }
 
+        public override Color getCellInBlock(int n)
+        {
+            return container.GetCell(n);
+        }
+
+        public override void setCellInBlock(int n, Color color)
+        {
+            container.SetCell(n, color);
+        }
+
         public override int NumberOfBlock()
         {
             return 1;
-        }
-
-        public override string StandartParameters()
-        {
-            return "";
-        }
-
-        public override bool ParametersReader(string parameters)
-        {
-            return true;
         }
     }
 }
