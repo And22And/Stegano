@@ -24,17 +24,17 @@ namespace Stegano
 
         public Form1()
         {
-            InitializeComponent();            
-            blockNames = Reflection.GetTypesNames(blockClass);
-            orderNames = Reflection.GetTypesNames(orderClass);
-            positionNames = Reflection.GetTypesNames(positionClass);
+            InitializeComponent();    
             writerNames = Reflection.GetTypesNames(writerClass);
+            positionNames = Reflection.GetTypesNames(positionClass);
+            orderNames = Reflection.GetTypesNames(orderClass);
+            blockNames = Reflection.GetTypesNames(blockClass);
+
             writerReader = (ContainerWriterReader)Reflection.CreateObjectByName(writerNames[0]);
             writerReader.SetPosition((CellPosition)Reflection.CreateObjectByName(positionNames[0]));
             writerReader.GetPosition().SetOrder((CellOrder)Reflection.CreateObjectByName(orderNames[0]));
             writerReader.GetOrder().SetBlock((ContainerBlock)Reflection.CreateObjectByName(blockNames[0]));
 
-            //order of next lines must be the same 
             setList(writerList, writerNames);
             setList(positionList, positionNames);
             setList(orderList, orderNames);
@@ -65,10 +65,10 @@ namespace Stegano
         private void showSpaceValues()
         {
             long needed = 0;
-            long avaliable = 0;
-            FileInfo info = new FileInfo(chosenFileName.Text);
+            long avaliable = 0;            
             if (chosenFileName.Text.Length != 0)
             {
+                FileInfo info = new FileInfo(chosenFileName.Text);
                 needed = info.Length * 8 + 64 + info.Name.Length * 16;
             }
             if (pictureBox1.Image != null)
@@ -188,6 +188,7 @@ namespace Stegano
                 setParameters(parameters, gui.AllParameters());
                 gui.ParametersReader(parameters.SelectedItem.ToString());
                 hint.Text = gui.HintString();
+                parameters.Enabled = true;
             }
             else
             {
