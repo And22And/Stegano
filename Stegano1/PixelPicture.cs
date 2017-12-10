@@ -37,7 +37,7 @@ namespace Stegano
             image.SetPixel(x, y, color);
         }
 
-        public int GetHeight()
+        public int GetHeigth()
         {
             return image.Height;
         }

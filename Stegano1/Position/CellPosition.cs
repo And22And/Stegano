@@ -12,7 +12,12 @@ namespace Stegano.Position
 
         public virtual Color GetNextPosition()
         {
-            NextPosition();
+            if(GetBlock().isNewBlock(NextPosition()))
+            {
+                GetBlock().NextBlock();
+                ToBegin();
+                return GetNextPosition();                
+            }
             return GetCurrentPosition();
         }
 

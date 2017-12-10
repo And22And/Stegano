@@ -4,52 +4,27 @@ using System.Drawing;
 namespace Stegano.Block
 {
     class FullBlock : ContainerBlock
-    {       
+    {
 
-        public FullBlock()
+        public override int getWidth()
         {
-            beginX = 0;
-            beginY = 0;            
+            return GetContainer().GetWidth();
         }
 
-        public override void SetContainer(PixelPicture container)
+        public override int getHeigth()
         {
-            base.SetContainer(container);
-            if (container != null)
-            {
-                endX = container.GetWidth();
-                endY = container.GetHeight();
-            }
-        }
-
-        public override int getBlockSize()
-        {
-            return container == null ? 0 : container.getCellNumber();
-        }
-
-        public override Color getCellInBlock(int x, int y)
-        {
-            return container.GetCell(x, y);
-        }
-
-        public override void setCellInBlock(int x, int y, Color color)
-        {
-            container.SetCell(x, y, color);
-        }
-
-        public override Color getCellInBlock(int n)
-        {
-            return container.GetCell(n);
-        }
-
-        public override void setCellInBlock(int n, Color color)
-        {
-            container.SetCell(n, color);
+            return GetContainer().GetHeigth();
         }
 
         public override int NumberOfBlock()
         {
             return 1;
+        }
+
+        public override void PositionTransformer(int x, int y, out int _x, out int _y)
+        {
+            _x = x;
+            _y = y;
         }
     }
 }

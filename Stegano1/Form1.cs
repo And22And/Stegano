@@ -62,11 +62,11 @@ namespace Stegano
             box.SelectedIndex = 0;
         }
 
-        private void showSpaceValues()
+        private bool showSpaceValues()
         {
             long needed = 0;
             long avaliable = 0;            
-            if (chosenFileName.Text.Length != 0)
+            if (File.Exists(chosenFileName.Text))
             {
                 FileInfo info = new FileInfo(chosenFileName.Text);
                 needed = info.Length * 8 + 64 + info.Name.Length * 16;
@@ -75,24 +75,68 @@ namespace Stegano
             {
                 avaliable = writerReader.getAvaliableSpace();
             }
-            string status = avaliable >= needed ? "OK" : "Chosen method and image is not enough to contain file";             
+            string status = avaliable >= needed ? "OK" : "Not enough to contain file";             
             spaceLabel.Text = needed + "/" + avaliable + " " + status;
+            return avaliable > needed && needed != 0;
         }
 
         private void writeBut_Click(object sender, EventArgs e)
         {
-            writerReader.GetPosition().ToBegin();
-            FileInfo info = new FileInfo(chosenFileName.Text);
-            writerReader.WriteFile(info.Name, HideFile.ReadBitArray(info.FullName));
-            pictureBox1.Image = new Bitmap(writerReader.GetContainer().image);
-            resultText.Text = "Writing is over";
+            if(!File.Exists(chosenFileName.Text))
+            {
+                resultText.Text = "File does not exist";
+            }
+            else if (pictureBox1.Image == null)
+            {
+                resultText.Text = "Picture is not set";
+            }
+            else if (showSpaceValues())
+            {
+                Write();
+            } else
+            {
+                resultText.Text = "Chosen methods and image is not enough to contain file";
+            }
+        }
+
+        private void Write()
+        {
+            try
+            {
+                FileInfo info = new FileInfo(chosenFileName.Text);
+                writerReader.WriteFile(info.Name, HideFile.ReadBitArray(info.FullName));
+                pictureBox1.Image = new Bitmap(writerReader.GetContainer().image);
+                resultText.Text = "Writing is over";
+            }
+            catch(Exception e)
+            {
+                resultText.Text = "Error during writing:" + e.ToString();
+                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(pictureBox1.Image)));
+            }
         }
 
         private void readBut_Click(object sender, EventArgs e)
         {
-            writerReader.GetPosition().ToBegin();
-            writerReader.ReadFile();
-            resultText.Text = "Reading is over";
+            if (pictureBox1.Image != null)
+            {
+                Read();
+            } else
+            {
+                resultText.Text = "Picture need to be set for reading";
+            }
+        }
+
+        private void Read()
+        {
+            try
+            {
+                writerReader.ReadFile();
+                resultText.Text = "Reading is over";
+            }
+            catch (Exception e)
+            {
+                resultText.Text = "Error during reading: check your methods selecting";
+            }
         }
 
         public void ShowMyImage(String fileToDisplay)
@@ -140,7 +184,6 @@ namespace Stegano
         private void blockList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender;
-            Console.WriteLine(blockNames[box.SelectedIndex]);
             ContainerBlock newBlock = (ContainerBlock)Reflection.CreateObjectByName(blockNames[box.SelectedIndex]);
             newBlock.SetContainer(writerReader.GetContainer());
             writerReader.GetOrder().SetBlock(newBlock);
@@ -151,7 +194,6 @@ namespace Stegano
         private void orderList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender;
-            Console.WriteLine(orderNames[box.SelectedIndex]);
             CellOrder newOrder = (CellOrder)Reflection.CreateObjectByName(orderNames[box.SelectedIndex]);
             newOrder.SetBlock(writerReader.GetBlock());
             writerReader.GetPosition().SetOrder(newOrder);
@@ -162,7 +204,6 @@ namespace Stegano
         private void positionList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender;
-            Console.WriteLine(positionNames[box.SelectedIndex]);
             CellPosition newPosition = (CellPosition)Reflection.CreateObjectByName(positionNames[box.SelectedIndex]);
             newPosition.SetOrder(writerReader.GetOrder());
             writerReader.SetPosition(newPosition);
@@ -173,7 +214,6 @@ namespace Stegano
         private void writerList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender;
-            Console.WriteLine(writerNames[box.SelectedIndex]);
             ContainerWriterReader newWriterReader = (ContainerWriterReader)Reflection.CreateObjectByName(writerNames[box.SelectedIndex]);
             newWriterReader.SetPosition(writerReader.GetPosition());
             writerReader = newWriterReader;
@@ -192,6 +232,10 @@ namespace Stegano
             }
             else
             {
+                parameters.Items.Clear();
+                parameters.Items.Add("");
+                parameters.SelectedIndex = 0;
+                hint.Text = "";
                 parameters.Enabled = false;
             }
         }      

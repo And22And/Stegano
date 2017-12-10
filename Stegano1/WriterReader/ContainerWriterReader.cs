@@ -18,6 +18,12 @@ namespace Stegano.WriterReader
 
         public abstract Color ColorWrite(BitArray data, int position, Color color);
 
+        public void ToBegin()
+        {
+            GetPosition().ToBegin();
+            GetBlock().ToBegin();
+        }
+
         public void SetPosition(CellPosition position)
         {
             this.position = position;
@@ -75,7 +81,7 @@ namespace Stegano.WriterReader
 
         public void WriteFile(string fileName, BitArray data)
         {
-            GetPosition().ToBegin();
+            ToBegin();
             byte[] nameBytes = BitByte.BytesFromString(fileName);
             WriteDataInContainer(BitByte.BitsFromInt(nameBytes.Length));
             BitArray array = BitByte.BytesToBits(nameBytes);
@@ -86,7 +92,7 @@ namespace Stegano.WriterReader
 
         public void ReadFile()
         {
-            GetPosition().ToBegin();
+            ToBegin();
             BitArray nameLength = ReadBytesInContainer(4);
             BitArray fileName = ReadBytesInContainer(BitByte.IntFromBits(nameLength));
             BitArray dataLength = ReadBytesInContainer(4);

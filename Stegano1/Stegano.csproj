@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitByte.cs" />
+    <Compile Include="Block\MiniBlockStairs.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Order\CasualOrder.cs" />
     <Compile Include="ParametersGenerator.cs" />
