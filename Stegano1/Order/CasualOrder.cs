@@ -23,7 +23,7 @@ namespace Stegano.Order
             parameters[2][1] = "vertical";
         }
 
-        public void PositionTransform(int number, out int x, out int y)
+        public override void PositionTransform(int number, out int x, out int y)
         {
             if (orientation.Equals(parameters[2][0]))
             {
@@ -32,8 +32,8 @@ namespace Stegano.Order
             }
             else
             {
-                x = number % block.getHeigth();
-                y = number / block.getHeigth();
+                y = number % block.getHeigth();
+                x = number / block.getHeigth();
             }
             if (corner.Equals(parameters[0][0] + parameters[1][0]))
             {
@@ -41,32 +41,18 @@ namespace Stegano.Order
             }
             if (corner.Equals(parameters[0][0] + parameters[1][1]))
             {
-                y = block.getHeigth() - y;                
+                y = block.getHeigth() - y - 1;                
             }
             if (corner.Equals(parameters[0][1] + parameters[1][0]))
             {
-                x = block.getWidth() - x;                
+                x = block.getWidth() - x - 1;                
             }
             if (corner.Equals(parameters[0][1] + parameters[1][1]))
             {                
-                x = block.getWidth() - x;
-                y = block.getHeigth() - y;                
+                x = block.getWidth() - x - 1;
+                y = block.getHeigth() - y - 1;                
             }
-        }
-
-        public override Color getCellInOrder(int position)
-        {
-            int x, y;
-            PositionTransform(position, out x, out y);
-            return block.getCellInBlock(x, y);
-        }
-
-        public override void setCellInOrder(int position, Color color)
-        {
-            int x, y;
-            PositionTransform(position, out x, out y);
-            block.setCellInBlock(x, y, color);
-        }
+        }        
 
         public override string[] AllParameters()
         {

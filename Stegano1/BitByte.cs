@@ -85,8 +85,6 @@ namespace Stegano
 
         public static BitArray BitsFromInt(int number)
         {
-            Console.WriteLine(number);
-            //byte[] bytes = BitConverter.GetBytes(number);
             return BytesToBits(BytesFromInt(number));
         }
 

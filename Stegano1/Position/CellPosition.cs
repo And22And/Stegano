@@ -1,6 +1,7 @@
 ﻿
 using Stegano.Block;
 using Stegano.Order;
+using System;
 using System.Drawing;
 
 namespace Stegano.Position
@@ -10,15 +11,15 @@ namespace Stegano.Position
         public CellOrder order;
         public int currentPosition;
 
-        public virtual Color GetNextPosition()
+        public virtual int GetNextPosition()
         {
-            if(GetBlock().isNewBlock(NextPosition()))
+            currentPosition = NextPosition();
+            if (GetBlock().isNewBlock(currentPosition))
             {
                 GetBlock().NextBlock();
-                ToBegin();
-                return GetNextPosition();                
+                ToBegin();               
             }
-            return GetCurrentPosition();
+            return currentPosition;
         }
 
         public virtual Color GetCurrentPosition()
@@ -29,6 +30,10 @@ namespace Stegano.Position
         public void SetCurrentPosition(Color color)
         {
             order.setCellInOrder(currentPosition, color);
+        }
+
+        public virtual void AfterChange() {
+            order.AfterChange();
         }
 
         public abstract int NextPosition();

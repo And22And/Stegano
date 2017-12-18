@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Stegano
 {
-    public partial class Form1 : Form
+    public partial class Stegano : Form
     {
         private static string blockClass = "Stegano.Block.ContainerBlock";
         private static string orderClass = "Stegano.Order.CellOrder";
@@ -20,9 +20,9 @@ namespace Stegano
         private string[] positionNames;
         private string[] writerNames;
         private ContainerWriterReader writerReader = null;
+        private static int cellToWrite;
 
-
-        public Form1()
+        public Stegano()
         {
             InitializeComponent();    
             writerNames = Reflection.GetTypesNames(writerClass);
@@ -64,20 +64,32 @@ namespace Stegano
 
         private bool showSpaceValues()
         {
-            long needed = 0;
-            long avaliable = 0;            
+            int needed = 0;
+            int avaliable = 0;            
             if (File.Exists(chosenFileName.Text))
             {
                 FileInfo info = new FileInfo(chosenFileName.Text);
-                needed = info.Length * 8 + 64 + info.Name.Length * 16;
+                needed = (int)info.Length * 8 + 64 + info.Name.Length * 16;
+                cellToWrite = needed/writerReader.BitsPerCell();
             }
             if (pictureBox1.Image != null)
             {
                 avaliable = writerReader.getAvaliableSpace();
+                writerReader.AfterChange();
             }
             string status = avaliable >= needed ? "OK" : "Not enough to contain file";             
             spaceLabel.Text = needed + "/" + avaliable + " " + status;
             return avaliable > needed && needed != 0;
+        }
+
+        public static int GetDataSize()
+        {
+            return cellToWrite;
+        }
+
+        public static void SetDataSize(int size)
+        {
+            cellToWrite = size;
         }
 
         private void writeBut_Click(object sender, EventArgs e)
@@ -110,7 +122,8 @@ namespace Stegano
             }
             catch(Exception e)
             {
-                resultText.Text = "Error during writing:" + e.ToString();
+                Console.WriteLine(e.ToString());
+                resultText.Text = "Error during writing";
                 writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(pictureBox1.Image)));
             }
         }

@@ -7,9 +7,25 @@ namespace Stegano.Order
     {
         public ContainerBlock block;
 
-        public abstract Color getCellInOrder(int position);
+        public abstract void PositionTransform(int number, out int x, out int y);
 
-        public abstract void setCellInOrder(int position, Color color);
+        public virtual Color getCellInOrder(int position)
+        {
+            int x, y;
+            PositionTransform(position, out x, out y);
+            return block.getCellInBlock(x, y);
+        }
+
+        public virtual void setCellInOrder(int position, Color color)
+        {
+            int x, y;
+            PositionTransform(position, out x, out y);
+            block.setCellInBlock(x, y, color);
+        }
+
+        public virtual void AfterChange() {
+            block.AfterChange();
+        }
 
         public void SetBlock(ContainerBlock block)
         {

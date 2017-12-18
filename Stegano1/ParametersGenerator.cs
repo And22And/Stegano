@@ -74,7 +74,7 @@ namespace Stegano
                     string[] nextArray = OrderCombinationRecursive(SubArray(parameters, i));
                     for (int j = 0; j < nextArray.Length; j++)
                     {
-                        result[i * nextArray.Length + j] = parameters[i] + nextArray[j];
+                        result[i * nextArray.Length + j] = parameters[i] + " " + nextArray[j];
                     }
                 }
             }

@@ -11,22 +11,6 @@ namespace Stegano.WriterReader
         private byte twoPower;
         private string[] parameters = {"1", "2", "3", "4"};
 
-        public LeastSignificantBit()
-        {
-        }
-
-        public LeastSignificantBit(int numberOfBit)
-        {
-            if (numberOfBit > 0 && numberOfBit < 5)
-            {
-                this.numberOfBit = numberOfBit;
-                twoPower = (byte)BitByte.powerOfTwo(numberOfBit);
-            } else
-            {
-                throw new Exception("Wrong number of least significant bit");
-            }
-        } 
-
         public override int BitsPerCell()
         {
             return numberOfBit * 3; //red, blue and green

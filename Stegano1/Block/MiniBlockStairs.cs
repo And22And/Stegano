@@ -28,9 +28,9 @@ namespace Stegano.Block
         }
 
         public override void PositionTransformer(int x, int y, out int _x, out int _y)
-        {
-            _x = x + CurrentBlock() * blockSize;
-            _y = y + CurrentBlock() * blockSize;
+        {          
+                _x = x + (CurrentBlock() % (container.GetWidth() / blockSize)) * blockSize;
+                _y = y + CurrentBlock() * blockSize;
         }
 
         public override bool HasParameters()

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Stegano.Block
 {
@@ -10,6 +11,10 @@ namespace Stegano.Block
         public void NextBlock()
         {
             currentBlock++;
+            if(currentBlock > NumberOfBlock())
+            {
+                throw new Exception("Insufficient number of block");
+            }
         }
 
         public int CurrentBlock()
@@ -17,19 +22,19 @@ namespace Stegano.Block
             return currentBlock;
         }
 
-        public void ToBegin()
+        public virtual void ToBegin()
         {
             currentBlock = 0;
         }
 
-        public int getBlockSize()
+        public virtual int getBlockSize()
         {
             return getWidth() * getHeigth();
         }
 
         public bool isNewBlock(int position)
         {
-            return position > getBlockSize();
+            return position >= getBlockSize();
         }
 
         public abstract int getWidth();
@@ -39,6 +44,8 @@ namespace Stegano.Block
         public abstract int NumberOfBlock();
 
         public abstract void PositionTransformer(int x, int y, out int _x, out int _y);
+
+        public virtual void AfterChange() { }
 
         public virtual Color getCellInBlock(int x, int y)
         {

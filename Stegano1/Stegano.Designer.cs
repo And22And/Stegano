@@ -1,6 +1,6 @@
 ﻿namespace Stegano
 {
-    partial class Form1
+    partial class Stegano
     {
 
         private System.ComponentModel.IContainer components = null;
@@ -363,7 +363,7 @@
             this.blockList.TabIndex = 0;
             this.blockList.SelectedIndexChanged += new System.EventHandler(this.blockList_SelectedIndexChanged);
             // 
-            // Form1
+            // Stegano
             // 
             this.ClientSize = new System.Drawing.Size(640, 462);
             this.Controls.Add(this.choseFileBut);
@@ -376,7 +376,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.Name = "Form1";
+            this.Name = "Stegano";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

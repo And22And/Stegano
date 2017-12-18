@@ -55,7 +55,6 @@ namespace Stegano.WriterReader
         public override BitArray ColorRead(Color color)
         {
             BitArray array = new BitArray(BitsPerCell());
-            BitByte.writeBitArray(array, 0, color.R, numberOfBit);
             if (hideColor.Equals("r"))
             {
                 BitByte.writeBitArray(array, 0, color.R, numberOfBit);

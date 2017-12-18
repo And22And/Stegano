@@ -6,11 +6,6 @@ namespace Stegano.Position
 {
     class NarrowPosition : CellPosition
     {
-        public NarrowPosition()
-        {
-
-        }
-
         public override int GetPositionsPerBlock()
         {
             return GetBlock().getBlockSize();
@@ -18,7 +13,7 @@ namespace Stegano.Position
 
         public override int NextPosition()
         {
-            return currentPosition++;
+            return currentPosition + 1;
         }
     }
 }
