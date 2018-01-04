@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
-
-namespace Stegano.Block
+﻿namespace Stegano.Block
 {
-    class FullBlock : ContainerBlock
+    class FullBlock : ModuleBlock
     {
 
         public override int getWidth()

@@ -8,11 +8,11 @@ using System.Text;
 
 namespace Stegano.WriterReader
 {
-    abstract class ContainerWriterReader : GUI
+    abstract class ModuleWriterReader : GUI
     {
-        public CellPosition position;
+        public ModulePosition position;
 
-        public abstract int BitsPerCell();
+        public abstract int BitsPerPixel();
 
         public abstract BitArray ColorRead(Color color);
 
@@ -20,30 +20,30 @@ namespace Stegano.WriterReader
 
         public void ToBegin()
         {
-            GetPosition().ToBegin();
             GetBlock().ToBegin();
+            GetPosition().ToBegin();
         }
 
         public virtual void AfterChange() {
             position.AfterChange();
         }
 
-        public void SetPosition(CellPosition position)
+        public void SetPosition(Position.ModulePosition position)
         {
             this.position = position;
         }
 
-        public CellPosition GetPosition()
+        public ModulePosition GetPosition()
         {
             return position;
         }
 
-        public CellOrder GetOrder()
+        public ModuleOrder GetOrder()
         {
             return position.GetOrder();
         }
 
-        public ContainerBlock GetBlock()
+        public ModuleBlock GetBlock()
         {
             return position.GetBlock();
         }
@@ -55,24 +55,24 @@ namespace Stegano.WriterReader
 
         public void WriteDataInContainer(BitArray data)
         {
-            int cells = data.Length / BitsPerCell() + (data.Length % BitsPerCell() == 0 ? 0 : 1);
+            int cells = data.Length / BitsPerPixel() + (data.Length % BitsPerPixel() == 0 ? 0 : 1);
             for(int i = 0; i < cells; i++)
             {
-                position.SetCurrentPosition( ColorWrite(data, i * BitsPerCell(), position.GetCurrentPosition()));
+                position.SetCurrentPosition( ColorWrite(data, i * BitsPerPixel(), position.GetCurrentPosition()));
                 position.GetNextPosition();
             }
         }
 
         public BitArray ReadDataInContainer(int number)
         {
-            BitArray data = new BitArray(number*BitsPerCell());
+            BitArray data = new BitArray(number*BitsPerPixel());
             for (int i = 0; i < number; i++)
             {
                 BitArray array = ColorRead(position.GetCurrentPosition());
                 position.GetNextPosition();
-                for(int j = 0; j  < BitsPerCell(); j++)
+                for(int j = 0; j  < BitsPerPixel(); j++)
                 {
-                    data.Set(i*BitsPerCell() + j, array.Get(j));
+                    data.Set(i*BitsPerPixel() + j, array.Get(j));
                 }
             }
             return data;
@@ -80,7 +80,7 @@ namespace Stegano.WriterReader
 
         public BitArray ReadBytesInContainer(int numberOfBytes)
         {
-            return ReadDataInContainer(numberOfBytes*8/BitsPerCell() + (numberOfBytes * 8 % BitsPerCell() == 0 ? 0 : 1));
+            return ReadDataInContainer(numberOfBytes*8/BitsPerPixel() + (numberOfBytes * 8 % BitsPerPixel() == 0 ? 0 : 1));
         }
 
         public virtual void WriteFile(string fileName, BitArray data)
@@ -106,7 +106,7 @@ namespace Stegano.WriterReader
 
         public int getAvaliableSpace()
         {
-            return BitsPerCell() * GetPosition().GetPositionsPerBlock() * GetBlock().NumberOfBlock();
+            return BitsPerPixel() * GetPosition().GetPositionsPerBlock() * GetBlock().NumberOfBlock();
         }        
     }
 }

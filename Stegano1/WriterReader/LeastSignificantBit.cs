@@ -4,14 +4,14 @@ using System.Drawing;
 
 namespace Stegano.WriterReader
 {
-    class LeastSignificantBit : ContainerWriterReader
+    class LeastSignificantBit : ModuleWriterReader
     {
         
         private int numberOfBit;
         private byte twoPower;
         private string[] parameters = {"1", "2", "3", "4"};
 
-        public override int BitsPerCell()
+        public override int BitsPerPixel()
         {
             return numberOfBit * 3; //red, blue and green
         }
@@ -28,7 +28,7 @@ namespace Stegano.WriterReader
 
         public override BitArray ColorRead(Color color)
         {
-            BitArray array = new BitArray(BitsPerCell());
+            BitArray array = new BitArray(BitsPerPixel());
             BitByte.writeBitArray(array, 0, color.R, numberOfBit);
             BitByte.writeBitArray(array, numberOfBit, color.G, numberOfBit);
             BitByte.writeBitArray(array, numberOfBit * 2, color.B, numberOfBit);

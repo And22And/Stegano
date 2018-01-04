@@ -1,10 +1,6 @@
-﻿
-using System;
-using System.Drawing;
-
-namespace Stegano.Position
+﻿namespace Stegano.Position
 {
-    class NarrowPosition : CellPosition
+    class NarrowPosition : ModulePosition
     {
         public override int GetPositionsPerBlock()
         {

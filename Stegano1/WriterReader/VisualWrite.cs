@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace Stegano.WriterReader
 {
-    class VisualWrite : ContainerWriterReader
+    class VisualWrite : ModuleWriterReader
     {
         private string[] parameters = { "1", "1/2", "1/3", "1/4", "file" };
         private string currentParameter;
 
-        public override int BitsPerCell()
+        public override int BitsPerPixel()
         {
             return 8;
         }
@@ -47,16 +44,16 @@ namespace Stegano.WriterReader
             switch (currentParameter)
             {
                 case "1":
-                    writeCells = getAvaliableSpace() / BitsPerCell();
+                    writeCells = getAvaliableSpace() / BitsPerPixel();
                     break;
                 case "1/2":
-                    writeCells = getAvaliableSpace() / BitsPerCell() / 2;
+                    writeCells = getAvaliableSpace() / BitsPerPixel() / 2;
                     break;
                 case "1/3":
-                    writeCells = getAvaliableSpace() / BitsPerCell() / 3;
+                    writeCells = getAvaliableSpace() / BitsPerPixel() / 3;
                     break;
                 case "1/4":
-                    writeCells = getAvaliableSpace() / BitsPerCell() / 4;
+                    writeCells = getAvaliableSpace() / BitsPerPixel() / 4;
                     break;
                 case "file":
                     byte[] nameBytes = BitByte.BytesFromString(fileName);

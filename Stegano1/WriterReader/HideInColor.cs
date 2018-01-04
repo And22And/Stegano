@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace Stegano.WriterReader
 {
-    class HideInColor : ContainerWriterReader
+    class HideInColor : ModuleWriterReader
     {
         private int numberOfBit;
         private string hideColor;
@@ -27,7 +24,7 @@ namespace Stegano.WriterReader
             parameters[1][3] = "4";
         }
 
-        public override int BitsPerCell()
+        public override int BitsPerPixel()
         {
             return numberOfBit;
         }
@@ -54,7 +51,7 @@ namespace Stegano.WriterReader
 
         public override BitArray ColorRead(Color color)
         {
-            BitArray array = new BitArray(BitsPerCell());
+            BitArray array = new BitArray(BitsPerPixel());
             if (hideColor.Equals("r"))
             {
                 BitByte.writeBitArray(array, 0, color.R, numberOfBit);

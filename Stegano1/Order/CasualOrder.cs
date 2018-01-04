@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
-
-namespace Stegano.Order
+﻿namespace Stegano.Order
 {
-    class CasualOrder : CellOrder
+    class CasualOrder : ModuleOrder
     {
         private string[][] parameters;
         private string corner;

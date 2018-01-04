@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Stegano.Position
+﻿namespace Stegano.Position
 {
-    class DinamicHolePosition : CellPosition
+    class DinamicHolePosition : ModulePosition
     {
         private int hole;
         private int[] holes = { 3, 1, 4, 2}; 

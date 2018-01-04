@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace Stegano.Position
 {
-    class PositionLinearPRNG : CellPosition
+    class PositionLinearPRNG : ModulePosition
     {
         private int a;
         private int b;
         private int cur;
         private int blockSize = 0;
+        private int par1, par2, par3;
+        private string[] parameters = { "7 3 5", "7 2 3", "3 9 7", "5 3 4", "2 5 3" };
 
         public override int GetPositionsPerBlock()
         {
@@ -38,15 +36,15 @@ namespace Stegano.Position
 
         public override void ToBegin()
         {
+            currentPosition = blockSize / par1 + blockSize / par2 - blockSize / par3;
+            b = currentPosition % 2 == 0 ? currentPosition + 1 : currentPosition;
+            while (gcd(b, blockSize) != 1)
+            {
+                b += 2;
+            }
             if (blockSize != GetBlock().getBlockSize()) {
                 blockSize = GetBlock().getBlockSize();
-                currentPosition = blockSize / 2;
-                a = genA(blockSize);
-                b = currentPosition % 2 == 0 ? currentPosition + 1 : currentPosition;
-                while (gcd(b, blockSize) != 1)
-                {
-                    b += 2;
-                }
+                a = genA(blockSize);                
             }
             cur = 0;
             currentPosition = blockSize / 2;
@@ -70,6 +68,10 @@ namespace Stegano.Position
             if (m % 4 == 0)
             {
                 a = 4;
+                while(m % 2 == 0)
+                {
+                    m /= 2;
+                }
             }
             while (m != 1)
             {
@@ -85,7 +87,34 @@ namespace Stegano.Position
                     i++;
                 }
             }
+            while(a < GetBlock().getBlockSize() / 3)
+            {
+                a *= 2;
+            }
             return a + 1;
+        }
+
+        public override string[] AllParameters()
+        {
+            return parameters;
+        }
+
+        public override bool HasParameters()
+        {
+            return true;
+        }
+
+        public override string HintString()
+        {
+            return "Parameters for different dispersion of PRNG";
+        }
+
+        public override void ParametersReader(string parameters)
+        {
+            string[] paramets = parameters.Split(' ');
+            par1 = Convert.ToInt32(paramets[0]);
+            par2 = Convert.ToInt32(paramets[1]);
+            par3 = Convert.ToInt32(paramets[2]);
         }
     }
 }

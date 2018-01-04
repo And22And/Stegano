@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace Stegano.Block
 {
-    class MiniBlockStairs : ContainerBlock
+    class MiniBlockStairs : ModuleBlock
     {
         private string[] parameters = {"5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"};
         private int blockSize;

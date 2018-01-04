@@ -1,14 +1,13 @@
 ﻿
 using Stegano.Block;
 using Stegano.Order;
-using System;
 using System.Drawing;
 
 namespace Stegano.Position
 {
-    abstract class CellPosition : GUI
+    abstract class ModulePosition : GUI
     {
-        public CellOrder order;
+        public ModuleOrder order;
         public int currentPosition;
 
         public virtual int GetNextPosition()
@@ -45,17 +44,17 @@ namespace Stegano.Position
             currentPosition = 0;
         }
 
-        public void SetOrder(CellOrder order)
+        public void SetOrder(Order.ModuleOrder order)
         {
             this.order = order;
         }
 
-        public CellOrder GetOrder()
+        public ModuleOrder GetOrder()
         {
             return order;
         }
 
-        public ContainerBlock GetBlock()
+        public ModuleBlock GetBlock()
         {
             return order.GetBlock();
         }

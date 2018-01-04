@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Stegano.Block
 {
-    class LineBlock : ContainerBlock
+    class LineBlock : ModuleBlock
     {
+        private int lineNumber;
+        private string[] parameters = { "2", "3", "4", "5", "6"};
+
         public override int getHeigth()
         {
             return container.GetHeigth();
@@ -14,7 +14,7 @@ namespace Stegano.Block
 
         public override int getWidth()
         {
-            return container.GetWidth()/12*6;
+            return container.GetWidth()/2/lineNumber*lineNumber;
         }
 
         public override int NumberOfBlock()
@@ -26,12 +26,32 @@ namespace Stegano.Block
         {
             _y = y;
             int xChange = 0;
-            while(x > getWidth()/6)
+            while(x > getWidth()/ lineNumber)
             {
-                x -= getWidth() / 6;
+                x -= getWidth() / lineNumber;
                 xChange++;
             }
-            _x = x + xChange * getWidth() / 3;
+            _x = x + xChange * getWidth() / lineNumber * 2;
+        }
+
+        public override string[] AllParameters()
+        {
+            return parameters;
+        }
+
+        public override bool HasParameters()
+        {
+            return true;
+        }
+
+        public override void ParametersReader(string parameters)
+        {
+            lineNumber = Convert.ToInt32(parameters);
+        }
+
+        public override string HintString()
+        {
+            return "Number of lines block";
         }
     }
 }

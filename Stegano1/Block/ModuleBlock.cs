@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Stegano.Block
 {
-    abstract class ContainerBlock : GUI
+    abstract class ModuleBlock : GUI
     {
         public PixelPicture container;
         private int currentBlock = 0;

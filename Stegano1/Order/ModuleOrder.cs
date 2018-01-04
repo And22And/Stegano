@@ -3,9 +3,9 @@ using System.Drawing;
 
 namespace Stegano.Order
 {
-    abstract class CellOrder : GUI
+    abstract class ModuleOrder : GUI
     {
-        public ContainerBlock block;
+        public ModuleBlock block;
 
         public abstract void PositionTransform(int number, out int x, out int y);
 
@@ -27,12 +27,12 @@ namespace Stegano.Order
             block.AfterChange();
         }
 
-        public void SetBlock(ContainerBlock block)
+        public void SetBlock(ModuleBlock block)
         {
             this.block = block;
         }
 
-        public ContainerBlock GetBlock()
+        public ModuleBlock GetBlock()
         {
             return block;
         }

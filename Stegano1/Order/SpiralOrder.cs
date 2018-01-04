@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-
-namespace Stegano.Order
+﻿namespace Stegano.Order
 {
-    class SpiralOrder : CellOrder
+    class SpiralOrder : ModuleOrder
     {
 
         private string[][] parameters;

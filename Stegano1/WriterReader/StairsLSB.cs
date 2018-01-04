@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace Stegano.WriterReader
 {
-    class StairsLSB : ContainerWriterReader
+    class StairsLSB : ModuleWriterReader
     {
 
         private string[] parameters = { "red", "green", "blue"};
         private string[] colors;
 
-        public override int BitsPerCell()
+        public override int BitsPerPixel()
         {
             return 6;
         }
 
         public override BitArray ColorRead(Color color)
         {
-            BitArray array = new BitArray(BitsPerCell());
+            BitArray array = new BitArray(BitsPerPixel());
             int number = 0;
             for (int i = 0; i < colors.Length; i++)
             {
