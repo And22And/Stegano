@@ -2,26 +2,14 @@
 
 namespace Stegano
 {
-    abstract class GUI
+    interface GUI
     {
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
+        string HintString();
 
-        public virtual bool HasParameters()
-        {
-            return false;
-        }
+        bool HasParameters();
 
-        public virtual string[] AllParameters()
-        {
-            throw new NotSupportedException();
-        }
+        string[] AllParameters();
 
-        public virtual void ParametersReader(string parameters)
-        {
-            throw new NotSupportedException();
-        }
+        void ParametersReader(string parameters);
     }
 }

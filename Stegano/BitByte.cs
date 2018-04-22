@@ -69,6 +69,12 @@ namespace Stegano
             //return BitConverter.ToInt32(bytes, 0);
         }
 
+        public static Boolean GetBitFromInt(int number, int position)
+        {
+            //Console.WriteLine("Num: " + number + ", pos: " + position + ", bit: " + ((number & (1 << position - 1)) != 0));
+            return (number & (1 << position - 1)) != 0;
+        }
+
         public static byte[] BytesFromInt(int number)
         {
             byte[] bytes = new byte[4];

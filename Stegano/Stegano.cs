@@ -1,25 +1,32 @@
-﻿using Stegano.Block;
+﻿using Stegano.Analisys;
+using Stegano.Block;
 using Stegano.Order;
 using Stegano.Position;
 using Stegano.WriterReader;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Stegano
 {
     public partial class Stegano : Form
     {
+        delegate void SetTextCallback(string text);
+
         private static string blockClass = "Stegano.Block.ModuleBlock";
         private static string orderClass = "Stegano.Order.ModuleOrder";
         private static string positionClass = "Stegano.Position.ModulePosition";
         private static string writerClass = "Stegano.WriterReader.ModuleWriterReader";
+        private static string analysisClass = "Stegano.Analisys.AnalisysHistogram";
         private string[] blockNames;
         private string[] orderNames;
         private string[] positionNames;
         private string[] writerNames;
+        private string[] analisysNames;
         private ModuleWriterReader writerReader = null;
+        private AnalisysHistogram histogram;
         private static int cellToWrite;
 
         public Stegano()
@@ -29,16 +36,19 @@ namespace Stegano
             positionNames = Reflection.GetTypesNames(positionClass);
             orderNames = Reflection.GetTypesNames(orderClass);
             blockNames = Reflection.GetTypesNames(blockClass);
+            analisysNames = Reflection.GetTypesNames(analysisClass);
 
             writerReader = (ModuleWriterReader)Reflection.CreateObjectByName(writerNames[0]);
             writerReader.SetPosition((ModulePosition)Reflection.CreateObjectByName(positionNames[0]));
             writerReader.GetPosition().SetOrder((ModuleOrder)Reflection.CreateObjectByName(orderNames[0]));
             writerReader.GetOrder().SetBlock((ModuleBlock)Reflection.CreateObjectByName(blockNames[0]));
+            histogram = (AnalisysHistogram)Reflection.CreateObjectByName(analisysNames[0]);
 
             setList(writerList, writerNames);
             setList(positionList, positionNames);
             setList(orderList, orderNames);
             setList(blockList, blockNames);
+            setList(analysisList, analisysNames);
 
             showSpaceValues();
         }
@@ -156,11 +166,12 @@ namespace Stegano
 
         public void ShowMyImage(String fileToDisplay)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             try
             {
                 pictureBox1.Image = new Bitmap(fileToDisplay);
-                resultText.Text = "Picture " + fileToDisplay + " is opened";
+                chosenImageName.Text = fileToDisplay;
+                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(pictureBox1.Image)));
+                showSpaceValues();
             }
             catch(Exception e)
             {
@@ -174,10 +185,13 @@ namespace Stegano
             ofd.Title = "Chose image";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ShowMyImage(ofd.FileName);
-                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(pictureBox1.Image)));
-                showSpaceValues();
+                ShowMyImage(ofd.FileName);               
             }
+        }
+
+        private void chosenImageName_TextChanged(object sender, EventArgs e)
+        {
+            ShowMyImage(((TextBox)sender).Text);
         }
 
         private void saveImageBut_Click(object sender, EventArgs e)
@@ -241,9 +255,9 @@ namespace Stegano
             newWriterReader.SetPosition(writerReader.GetPosition());
             writerReader = newWriterReader;
             SetGUI(newWriterReader, writerParameter, writerHint);
-            showSpaceValues();           
-        } 
-        
+            showSpaceValues();
+        }
+
         private void SetGUI(GUI gui, ComboBox parameters, RichTextBox hint)
         {
             if (gui.HasParameters())
@@ -290,6 +304,66 @@ namespace Stegano
                 type.ParametersReader(sender.SelectedItem.ToString());
             }
             showSpaceValues();
+        }
+
+        private void analysisList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender;
+            histogram = (AnalisysHistogram)Reflection.CreateObjectByName(analisysNames[box.SelectedIndex]);
+            if (histogram.HasParameters())
+            {
+                setParameters(analisysParameters, histogram.AllParameters());
+                histogram.ParametersReader(analisysParameters.SelectedItem.ToString());
+                analisysParameters.Enabled = true;
+            }
+            else
+            {
+                analisysParameters.Items.Clear();
+                analisysParameters.Items.Add("");
+                analisysParameters.SelectedIndex = 0;
+                analisysParameters.Enabled = false;
+            }
+            histogram = histogram;
+        }
+
+        private void analisysParameters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectParameter(histogram, (ComboBox)sender);
+        }
+
+        private void Analisys_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image == null)
+            {
+                resultText.Text = "Picture is not set";
+            }
+            else
+            {
+                AnalisysHistogram hist = (AnalisysHistogram)histogram.Clone();
+                Thread newThread = new Thread(parametrs => this.AnalisysThread(hist));                
+                newThread.Start();
+            }
+        }
+
+        private void AnalisysThread(AnalisysHistogram hist)
+        {
+            SetAnalisysText("Analisys is started");
+            AnalisysForm form = new AnalisysForm(new Bitmap(pictureBox1.Image), hist);
+            Application.Run(form);
+            SetAnalisysText("Analisys is over");
+        }
+
+        private void SetAnalisysText(string text)
+        {
+            if (analisysText.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetAnalisysText);
+                Invoke(d, new object[] { text });
+            }
+            else
+            {
+                analisysText.Text = text;
+            }
         }
     }
 

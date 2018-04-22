@@ -35,6 +35,7 @@
             this.readBut = new System.Windows.Forms.Button();
             this.choseFileBut = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chosenImageName = new System.Windows.Forms.TextBox();
             this.resultText = new System.Windows.Forms.RichTextBox();
             this.spaceLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -55,9 +56,15 @@
             this.orderList = new System.Windows.Forms.ComboBox();
             this.BlockLabel = new System.Windows.Forms.Label();
             this.blockList = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.analisysText = new System.Windows.Forms.RichTextBox();
+            this.analysisList = new System.Windows.Forms.ComboBox();
+            this.Analisys = new System.Windows.Forms.Button();
+            this.analisysParameters = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -66,6 +73,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(231, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(388, 229);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -80,14 +88,14 @@
             // 
             // chosenFileName
             // 
-            this.chosenFileName.Location = new System.Drawing.Point(311, 289);
+            this.chosenFileName.Location = new System.Drawing.Point(99, 286);
             this.chosenFileName.Name = "chosenFileName";
             this.chosenFileName.Size = new System.Drawing.Size(209, 20);
             this.chosenFileName.TabIndex = 2;
             // 
             // choseImageBut
             // 
-            this.choseImageBut.Location = new System.Drawing.Point(231, 250);
+            this.choseImageBut.Location = new System.Drawing.Point(314, 248);
             this.choseImageBut.Name = "choseImageBut";
             this.choseImageBut.Size = new System.Drawing.Size(84, 23);
             this.choseImageBut.TabIndex = 3;
@@ -97,7 +105,7 @@
             // 
             // saveImageBut
             // 
-            this.saveImageBut.Location = new System.Drawing.Point(535, 250);
+            this.saveImageBut.Location = new System.Drawing.Point(10, 248);
             this.saveImageBut.Name = "saveImageBut";
             this.saveImageBut.Size = new System.Drawing.Size(84, 23);
             this.saveImageBut.TabIndex = 4;
@@ -137,8 +145,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chosenImageName);
             this.groupBox1.Controls.Add(this.resultText);
             this.groupBox1.Controls.Add(this.spaceLabel);
+            this.groupBox1.Controls.Add(this.choseImageBut);
+            this.groupBox1.Controls.Add(this.chosenFileName);
+            this.groupBox1.Controls.Add(this.saveImageBut);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(221, 2);
@@ -146,6 +158,14 @@
             this.groupBox1.Size = new System.Drawing.Size(411, 448);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
+            // 
+            // chosenImageName
+            // 
+            this.chosenImageName.Location = new System.Drawing.Point(99, 250);
+            this.chosenImageName.Name = "chosenImageName";
+            this.chosenImageName.Size = new System.Drawing.Size(209, 20);
+            this.chosenImageName.TabIndex = 19;
+            this.chosenImageName.TextChanged += new System.EventHandler(this.chosenImageName_TextChanged);
             // 
             // resultText
             // 
@@ -363,15 +383,68 @@
             this.blockList.TabIndex = 0;
             this.blockList.SelectedIndexChanged += new System.EventHandler(this.blockList_SelectedIndexChanged);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.analisysParameters);
+            this.groupBox3.Controls.Add(this.analisysText);
+            this.groupBox3.Controls.Add(this.analysisList);
+            this.groupBox3.Controls.Add(this.Analisys);
+            this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox3.ForeColor = System.Drawing.Color.Black;
+            this.groupBox3.Location = new System.Drawing.Point(638, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(411, 448);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            // 
+            // analisysText
+            // 
+            this.analisysText.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.analisysText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.analisysText.Cursor = System.Windows.Forms.Cursors.Default;
+            this.analisysText.Enabled = false;
+            this.analisysText.ForeColor = System.Drawing.Color.Blue;
+            this.analisysText.Location = new System.Drawing.Point(6, 363);
+            this.analisysText.Name = "analisysText";
+            this.analisysText.Size = new System.Drawing.Size(388, 36);
+            this.analisysText.TabIndex = 18;
+            this.analisysText.Text = "";
+            // 
+            // analysisList
+            // 
+            this.analysisList.FormattingEnabled = true;
+            this.analysisList.Location = new System.Drawing.Point(6, 324);
+            this.analysisList.Name = "analysisList";
+            this.analysisList.Size = new System.Drawing.Size(171, 21);
+            this.analysisList.TabIndex = 5;
+            this.analysisList.SelectedIndexChanged += new System.EventHandler(this.analysisList_SelectedIndexChanged);
+            // 
+            // Analisys
+            // 
+            this.Analisys.Location = new System.Drawing.Point(319, 324);
+            this.Analisys.Name = "Analisys";
+            this.Analisys.Size = new System.Drawing.Size(75, 23);
+            this.Analisys.TabIndex = 0;
+            this.Analisys.Text = "Analisys";
+            this.Analisys.UseVisualStyleBackColor = true;
+            this.Analisys.Click += new System.EventHandler(this.Analisys_Click);
+            // 
+            // analisysParameters
+            // 
+            this.analisysParameters.FormattingEnabled = true;
+            this.analisysParameters.Location = new System.Drawing.Point(183, 324);
+            this.analisysParameters.Name = "analisysParameters";
+            this.analisysParameters.Size = new System.Drawing.Size(130, 21);
+            this.analisysParameters.TabIndex = 20;
+            this.analisysParameters.SelectedIndexChanged += new System.EventHandler(this.analisysParameters_SelectedIndexChanged);
+            // 
             // Stegano
             // 
-            this.ClientSize = new System.Drawing.Size(640, 462);
+            this.ClientSize = new System.Drawing.Size(1062, 462);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.choseFileBut);
             this.Controls.Add(this.readBut);
             this.Controls.Add(this.writeBut);
-            this.Controls.Add(this.saveImageBut);
-            this.Controls.Add(this.choseImageBut);
-            this.Controls.Add(this.chosenFileName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
@@ -382,6 +455,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,6 +483,12 @@
         private System.Windows.Forms.ComboBox positionParameter;
         private System.Windows.Forms.ComboBox orderParameter;
         private System.Windows.Forms.ComboBox blockParameter;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button Analisys;
+        private System.Windows.Forms.ComboBox analysisList;
+        private System.Windows.Forms.RichTextBox analisysText;
+        private System.Windows.Forms.TextBox chosenImageName;
+        private System.Windows.Forms.ComboBox analisysParameters;
     }
 }
 
