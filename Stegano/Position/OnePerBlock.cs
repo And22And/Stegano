@@ -23,5 +23,10 @@
         {
             nextPos = GetBlock().CurrentBlock();
         }
+
+        public override string GetName()
+        {
+            return "One per block";
+        }
     }
 }

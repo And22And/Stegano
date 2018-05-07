@@ -1,6 +1,6 @@
 ﻿namespace Stegano.Position
 {
-    class NarrowPosition : ModulePosition
+    class NonePositions : ModulePosition
     {
         public override int GetPositionsPerBlock()
         {
@@ -10,6 +10,11 @@
         public override int NextPosition()
         {
             return currentPosition + 1;
+        }
+
+        public override string GetName()
+        {
+            return "None";
         }
     }
 }

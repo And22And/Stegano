@@ -53,5 +53,10 @@ namespace Stegano.Block
         {
             return "Number of lines block";
         }
+
+        public override string GetName()
+        {
+            return "Line block";
+        }
     }
 }

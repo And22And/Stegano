@@ -1,10 +1,11 @@
 ﻿using Stegano.Block;
-using System;
+using Stegano.Container;
+using Stegano.GUI;
 using System.Drawing;
 
 namespace Stegano.Order
 {
-    abstract class ModuleOrder : GUI
+    abstract class ModuleOrder : UI
     {
         public ModuleBlock block;
 
@@ -41,26 +42,6 @@ namespace Stegano.Order
         public virtual PixelPicture GetContainer()
         {
             return block.GetContainer();
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public virtual bool HasParameters()
-        {
-            return false;
-        }
-
-        public virtual string[] AllParameters()
-        {
-            throw new NotSupportedException();
-        }
-
-        public virtual void ParametersReader(string parameters)
-        {
-            throw new NotSupportedException();
         }
     }
 }

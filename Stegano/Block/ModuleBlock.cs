@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Drawing;
+using Stegano.GUI;
+using Stegano.Container;
 
 namespace Stegano.Block
 {
-    abstract class ModuleBlock : GUI
+    abstract class ModuleBlock : UI
     {
         public PixelPicture container;
         private int currentBlock = 0;
@@ -69,26 +71,6 @@ namespace Stegano.Block
         public PixelPicture GetContainer()
         {
             return container;
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public virtual bool HasParameters()
-        {
-            return false;
-        }
-
-        public virtual string[] AllParameters()
-        {
-            throw new NotSupportedException();
-        }
-
-        public virtual void ParametersReader(string parameters)
-        {
-            throw new NotSupportedException();
         }
     }
 }

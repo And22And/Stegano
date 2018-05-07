@@ -1,17 +1,19 @@
-﻿using Stegano.Analisys;
+﻿using Stegano.Analysis;
 using Stegano.Block;
+using Stegano.Container;
 using Stegano.Order;
 using Stegano.Position;
 using Stegano.WriterReader;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Stegano
+namespace Stegano.GUI
 {
-    public partial class Stegano : Form
+    public partial class MainForm : Form
     {
         delegate void SetTextCallback(string text);
 
@@ -19,24 +21,24 @@ namespace Stegano
         private static string orderClass = "Stegano.Order.ModuleOrder";
         private static string positionClass = "Stegano.Position.ModulePosition";
         private static string writerClass = "Stegano.WriterReader.ModuleWriterReader";
-        private static string analysisClass = "Stegano.Analisys.AnalisysHistogram";
-        private string[] blockNames;
-        private string[] orderNames;
-        private string[] positionNames;
-        private string[] writerNames;
-        private string[] analisysNames;
+        private static string analysisClass = "Stegano.Analysis.AnalisysHistogram";
+        private List<string> blockNames;
+        private List<string> orderNames;
+        private List<string> positionNames;
+        private List<string> writerNames;
+        private List<string> analisysNames;
         private ModuleWriterReader writerReader = null;
         private AnalisysHistogram histogram;
         private static int cellToWrite;
 
-        public Stegano()
+        public MainForm()
         {
             InitializeComponent();    
-            writerNames = Reflection.GetTypesNames(writerClass);
-            positionNames = Reflection.GetTypesNames(positionClass);
-            orderNames = Reflection.GetTypesNames(orderClass);
-            blockNames = Reflection.GetTypesNames(blockClass);
-            analisysNames = Reflection.GetTypesNames(analysisClass);
+            writerNames = new List<string>(Reflection.GetTypesNames(writerClass));
+            positionNames = new List<string>(Reflection.GetTypesNames(positionClass));
+            orderNames = new List<string>(Reflection.GetTypesNames(orderClass));
+            blockNames = new List<string>(Reflection.GetTypesNames(blockClass));
+            analisysNames = new List<string>(Reflection.GetTypesNames(analysisClass));
 
             writerReader = (ModuleWriterReader)Reflection.CreateObjectByName(writerNames[0]);
             writerReader.SetPosition((ModulePosition)Reflection.CreateObjectByName(positionNames[0]));
@@ -53,11 +55,28 @@ namespace Stegano
             showSpaceValues();
         }
 
-        private void setList(ComboBox box, string[] names)
+        private void setList(ComboBox box, List<string> names)
         {
-            for (int i = 0; i < names.Length; i++)
+            for (int i = 0; i < names.Count; i++)
             {
-                box.Items.Add(names[i].Substring(names[i].LastIndexOf(".") + 1));
+                UI item = (UI)Reflection.CreateObjectByName(names[i]);
+                if (item.IsShown())
+                {
+                    if (!item.GetName().Equals("None"))
+                    {
+                        box.Items.Add(item.GetName());
+                    }
+                    else
+                    {
+                        box.Items.Insert(0, item.GetName());
+                        string noneName = names[i];
+                        names.RemoveAt(i);
+                        names.Insert(0, noneName);
+                    }
+                } else
+                {
+                    names.RemoveAt(i);
+                }
             }
             box.SelectedIndex = 0;
         }
@@ -82,7 +101,7 @@ namespace Stegano
                 needed = (int)info.Length * 8 + 64 + info.Name.Length * 16;
                 cellToWrite = needed/writerReader.BitsPerPixel();
             }
-            if (pictureBox1.Image != null)
+            if (container.Image != null)
             {
                 avaliable = writerReader.getAvaliableSpace();
                 writerReader.AfterChange();
@@ -108,7 +127,7 @@ namespace Stegano
             {
                 resultText.Text = "File does not exist";
             }
-            else if (pictureBox1.Image == null)
+            else if (container.Image == null)
             {
                 resultText.Text = "Picture is not set";
             }
@@ -128,20 +147,20 @@ namespace Stegano
                 resultText.Text = "Writing is started";
                 FileInfo info = new FileInfo(chosenFileName.Text);
                 writerReader.WriteFile(info.Name, HideFile.ReadBitArray(info.FullName));
-                pictureBox1.Image = new Bitmap(writerReader.GetContainer().image);
+                container.Image = new Bitmap(writerReader.GetContainer().image);
                 resultText.Text = "Writing is over";
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
                 resultText.Text = "Error during writing";
-                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(pictureBox1.Image)));
+                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(container.Image)));
             }
         }
 
         private void readBut_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (container.Image != null)
             {
                 Read();
             } else
@@ -168,9 +187,9 @@ namespace Stegano
         {
             try
             {
-                pictureBox1.Image = new Bitmap(fileToDisplay);
+                container.Image = new Bitmap(fileToDisplay);
                 chosenImageName.Text = fileToDisplay;
-                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(pictureBox1.Image)));
+                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(container.Image)));
                 showSpaceValues();
             }
             catch(Exception e)
@@ -203,7 +222,7 @@ namespace Stegano
             sfd.AddExtension = true;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Image.Save(sfd.FileName, pictureBox1.Image.RawFormat);
+                container.Image.Save(sfd.FileName, container.Image.RawFormat);
             }
         }
 
@@ -258,7 +277,7 @@ namespace Stegano
             showSpaceValues();
         }
 
-        private void SetGUI(GUI gui, ComboBox parameters, RichTextBox hint)
+        private void SetGUI(UI gui, ComboBox parameters, RichTextBox hint)
         {
             if (gui.HasParameters())
             {
@@ -272,7 +291,7 @@ namespace Stegano
                 parameters.Items.Clear();
                 parameters.Items.Add("");
                 parameters.SelectedIndex = 0;
-                hint.Text = "";
+                hint.Text = gui.HintString();
                 parameters.Enabled = false;
             }
         }      
@@ -297,7 +316,7 @@ namespace Stegano
             SelectParameter(writerReader, (ComboBox)sender);
         }
 
-        private void SelectParameter(GUI type, ComboBox sender)
+        private void SelectParameter(UI type, ComboBox sender)
         {
             if (type.HasParameters())
             {
@@ -323,7 +342,6 @@ namespace Stegano
                 analisysParameters.SelectedIndex = 0;
                 analisysParameters.Enabled = false;
             }
-            histogram = histogram;
         }
 
         private void analisysParameters_SelectedIndexChanged(object sender, EventArgs e)
@@ -333,9 +351,9 @@ namespace Stegano
 
         private void Analisys_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
+            if (container.Image == null)
             {
-                resultText.Text = "Picture is not set";
+                analisysText.Text = "Picture is not set";
             }
             else
             {
@@ -348,7 +366,7 @@ namespace Stegano
         private void AnalisysThread(AnalisysHistogram hist)
         {
             SetAnalisysText("Analisys is started");
-            AnalisysForm form = new AnalisysForm(new Bitmap(pictureBox1.Image), hist);
+            AnalisysForm form = new AnalisysForm(new Bitmap(container.Image), hist);
             Application.Run(form);
             SetAnalisysText("Analisys is over");
         }
@@ -364,6 +382,26 @@ namespace Stegano
             {
                 analisysText.Text = text;
             }
+        }
+
+        private void clearImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showPixels_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showPixelsParameters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showPixelsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

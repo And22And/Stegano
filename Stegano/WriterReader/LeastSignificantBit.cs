@@ -55,5 +55,10 @@ namespace Stegano.WriterReader
         {
             return true;
         }
+
+        public override string GetName()
+        {
+            return "Least significant bit(LSB)";
+        }
     }
 }

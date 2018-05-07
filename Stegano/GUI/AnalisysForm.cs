@@ -1,7 +1,8 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Stegano.Analysis;
 
-namespace Stegano.Analisys
+namespace Stegano.GUI
 {
     public partial class AnalisysForm : Form
     {

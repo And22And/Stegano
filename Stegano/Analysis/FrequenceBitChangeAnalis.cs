@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
-namespace Stegano.Analisys
+namespace Stegano.Analysis
 {
     class FrequenceBitChangeAnalis : AnalisysHistogram
     {
@@ -145,6 +144,11 @@ namespace Stegano.Analisys
         public override void ParametersReader(string parameters)
         {
             parameter = parameters;
+        }
+
+        public override string GetName()
+        {
+            return "Frequence bit change analysis";
         }
     }
 }

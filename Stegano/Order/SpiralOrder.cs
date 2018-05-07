@@ -1,4 +1,6 @@
-﻿namespace Stegano.Order
+﻿using Stegano.GUI;
+
+namespace Stegano.Order
 {
     class SpiralOrder : ModuleOrder
     {
@@ -138,6 +140,11 @@
         public override bool HasParameters()
         {
             return true;
+        }
+
+        public override string GetName()
+        {
+            return "Spiral order";
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Drawing;
+using Stegano.GUI;
 
 namespace Stegano.WriterReader
 {
@@ -80,6 +81,11 @@ namespace Stegano.WriterReader
         public override bool HasParameters()
         {
             return true;
+        }
+
+        public override string GetName()
+        {
+            return "Stairs LSB";
         }
     }
 }

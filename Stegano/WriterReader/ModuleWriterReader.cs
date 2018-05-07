@@ -1,14 +1,14 @@
 ﻿using Stegano.Block;
 using Stegano.Order;
 using Stegano.Position;
-using System;
 using System.Collections;
 using System.Drawing;
-using System.Text;
+using Stegano.GUI;
+using Stegano.Container;
 
 namespace Stegano.WriterReader
 {
-    abstract class ModuleWriterReader : GUI
+    abstract class ModuleWriterReader : UI
     {
         public ModulePosition position;
 
@@ -107,26 +107,6 @@ namespace Stegano.WriterReader
         public int getAvaliableSpace()
         {
             return BitsPerPixel() * GetPosition().GetPositionsPerBlock() * GetBlock().NumberOfBlock();
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public virtual bool HasParameters()
-        {
-            return false;
-        }
-
-        public virtual string[] AllParameters()
-        {
-            throw new NotSupportedException();
-        }
-
-        public virtual void ParametersReader(string parameters)
-        {
-            throw new NotSupportedException();
         }
     }
 }

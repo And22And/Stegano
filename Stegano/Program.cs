@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Stegano.GUI;
 
 namespace Stegano
 {
@@ -16,7 +14,7 @@ namespace Stegano
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Stegano());
+            Application.Run(new MainForm());
         }
     }
 }

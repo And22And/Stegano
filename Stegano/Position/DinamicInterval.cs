@@ -1,6 +1,6 @@
 ﻿namespace Stegano.Position
 {
-    class DinamicHolePosition : ModulePosition
+    class DinamicInterval : ModulePosition
     {
         private int hole;
         private int[] holes = { 3, 1, 4, 2}; 
@@ -21,6 +21,11 @@
         {
             base.ToBegin();
             hole = 0;
+        }
+
+        public override string GetName()
+        {
+            return "Dinamic interval";
         }
     }
 }

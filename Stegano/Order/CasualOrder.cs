@@ -1,4 +1,6 @@
-﻿namespace Stegano.Order
+﻿using Stegano.GUI;
+
+namespace Stegano.Order
 {
     class CasualOrder : ModuleOrder
     {
@@ -71,6 +73,11 @@
         public override bool HasParameters()
         {
             return true;
+        }
+
+        public override string GetName()
+        {
+            return "Casual order";
         }
     }
 }

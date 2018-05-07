@@ -48,52 +48,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analisys\AnalisysForm.cs">
+    <Compile Include="GUI\AnalisysForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Analisys\AnalisysForm.Designer.cs">
+    <Compile Include="GUI\AnalisysForm.Designer.cs">
       <DependentUpon>AnalisysForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Analisys\AnalisysHistogram.cs" />
-    <Compile Include="Analisys\SequenceBitFrequence.cs" />
-    <Compile Include="Analisys\FrequenceBitChangeAnalis.cs" />
+    <Compile Include="Analysis\AnalisysHistogram.cs" />
+    <Compile Include="Analysis\SequenceBitFrequence.cs" />
+    <Compile Include="Analysis\FrequenceBitChangeAnalis.cs" />
     <Compile Include="BitByte.cs" />
     <Compile Include="Block\LineBlock.cs" />
     <Compile Include="Block\MiniBlockStairs.cs" />
-    <Compile Include="GUI.cs" />
+    <Compile Include="GUI\UI.cs" />
     <Compile Include="Order\CasualOrder.cs" />
+    <Compile Include="Order\NoneOrder.cs" />
     <Compile Include="Order\SpiralOrder.cs" />
-    <Compile Include="ParametersGenerator.cs" />
-    <Compile Include="Position\DinamicHolePosition.cs" />
-    <Compile Include="Position\NarrowPosition.cs" />
+    <Compile Include="GUI\ParametersGenerator.cs" />
+    <Compile Include="Position\DinamicInterval.cs" />
+    <Compile Include="Position\NonePositions.cs" />
     <Compile Include="Order\ModuleOrder.cs" />
     <Compile Include="Position\ModulePosition.cs" />
     <Compile Include="Block\ModuleBlock.cs" />
     <Compile Include="Position\OnePerBlock.cs" />
-    <Compile Include="Position\PositionLinearPRNG.cs" />
-    <Compile Include="Position\PositionsWithHole.cs" />
+    <Compile Include="Position\LinearPRNG.cs" />
+    <Compile Include="Position\StaticInterval.cs" />
     <Compile Include="Reflection.cs" />
+    <Compile Include="GUI\UIInterface.cs" />
     <Compile Include="WriterReader\ModuleWriterReader.cs" />
-    <Compile Include="Stegano.cs">
+    <Compile Include="GUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stegano.Designer.cs">
-      <DependentUpon>Stegano.cs</DependentUpon>
+    <Compile Include="GUI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Block\FullBlock.cs" />
-    <Compile Include="HideFile.cs" />
+    <Compile Include="Block\NoneBlock.cs" />
+    <Compile Include="Container\HideFile.cs" />
     <Compile Include="WriterReader\HideInColor.cs" />
     <Compile Include="WriterReader\LeastSignificantBit.cs" />
-    <Compile Include="PixelPicture.cs" />
+    <Compile Include="Container\PixelPicture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WriterReader\StairsLSB.cs" />
     <Compile Include="WriterReader\VisualWrite.cs" />
-    <EmbeddedResource Include="Analisys\AnalisysForm.resx">
+    <EmbeddedResource Include="GUI\AnalisysForm.resx">
       <DependentUpon>AnalisysForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Stegano.resx">
-      <DependentUpon>Stegano.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

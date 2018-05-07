@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Stegano
+namespace Stegano.Container
 {
     class PixelPicture
     {

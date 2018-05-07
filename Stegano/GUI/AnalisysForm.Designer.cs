@@ -1,4 +1,4 @@
-﻿namespace Stegano.Analisys
+﻿namespace Stegano.GUI
 {
     partial class AnalisysForm
     {

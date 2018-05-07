@@ -48,5 +48,10 @@ namespace Stegano.Block
         {
             return "Set size of block";
         }
+
+        public override string GetName()
+        {
+            return "Block stairs";
+        }
     }
 }

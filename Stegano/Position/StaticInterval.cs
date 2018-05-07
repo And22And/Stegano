@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stegano.Position
 {
-    class PositionsWithHole : ModulePosition
+    class StaticInterval : ModulePosition
     {
         private int hole;
         private string[] parameters = { "1", "2", "3", "4", "5" };
@@ -34,6 +34,11 @@ namespace Stegano.Position
         public override bool HasParameters()
         {
             return true;
+        }
+
+        public override string GetName()
+        {
+            return "Static interval";
         }
     }
 }

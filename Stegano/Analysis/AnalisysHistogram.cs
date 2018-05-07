@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
+using Stegano.GUI;
 
-namespace Stegano.Analisys
+namespace Stegano.Analysis
 {
-    public abstract class AnalisysHistogram : GUI, ICloneable
+    public abstract class AnalisysHistogram : UI, ICloneable
     {
         private Dictionary<string, List<Int32>> histogramData = new Dictionary<string, List<Int32>>();
         private List<string> series = new List<string>();
@@ -94,20 +95,6 @@ namespace Stegano.Analisys
         abstract public void SetData();
 
         abstract public void SetSeries();
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public virtual bool HasParameters()
-        {
-            return false;
-        }
-
-        public abstract string[] AllParameters();
-
-        public abstract void ParametersReader(string parameters);
 
         public object Clone()
         {

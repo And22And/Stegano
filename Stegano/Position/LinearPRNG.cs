@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stegano.Position
 {
-    class PositionLinearPRNG : ModulePosition
+    class LinearPRNG : ModulePosition
     {
         private int a;
         private int b;
@@ -115,6 +115,11 @@ namespace Stegano.Position
             par1 = Convert.ToInt32(paramets[0]);
             par2 = Convert.ToInt32(paramets[1]);
             par3 = Convert.ToInt32(paramets[2]);
+        }
+
+        public override string GetName()
+        {
+            return "Linear PRNG";
         }
     }
 }

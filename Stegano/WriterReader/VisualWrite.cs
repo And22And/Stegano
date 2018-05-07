@@ -60,7 +60,7 @@ namespace Stegano.WriterReader
                     writeCells = nameBytes.Length + data.Length + 4 + 4;
                     break;
             }
-            Stegano.SetDataSize(writeCells);
+            //MainForm.SetDataSize(writeCells);
             AfterChange();
             ToBegin();
             WriteRed(writeCells);              
@@ -84,6 +84,11 @@ namespace Stegano.WriterReader
         public override string[] AllParameters()
         {
             return parameters;
+        }
+
+        public override string GetName()
+        {
+            return "Mark pixel";
         }
     }
 }

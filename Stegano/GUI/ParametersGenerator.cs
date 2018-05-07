@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Stegano
+namespace Stegano.GUI
 {
     class ParametersGenerator
     {

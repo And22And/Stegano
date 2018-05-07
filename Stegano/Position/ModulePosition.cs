@@ -1,12 +1,12 @@
-﻿
-using Stegano.Block;
+﻿using Stegano.Block;
 using Stegano.Order;
-using System;
+using Stegano.GUI;
 using System.Drawing;
+using Stegano.Container;
 
 namespace Stegano.Position
 {
-    abstract class ModulePosition : GUI
+    abstract class ModulePosition : UI
     {
         public ModuleOrder order;
         public int currentPosition;
@@ -63,26 +63,6 @@ namespace Stegano.Position
         public virtual PixelPicture GetContainer()
         {
             return order.GetContainer();
-        }
-
-        public virtual string HintString()
-        {
-            return "This does not requare any parameters";
-        }
-
-        public virtual bool HasParameters()
-        {
-            return false;
-        }
-
-        public virtual string[] AllParameters()
-        {
-            throw new NotSupportedException();
-        }
-
-        public virtual void ParametersReader(string parameters)
-        {
-            throw new NotSupportedException();
         }
     }
 }

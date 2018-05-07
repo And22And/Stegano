@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Stegano.Analisys
+namespace Stegano.Analysis
 {
     class SequenceBitFrequence : AnalisysHistogram
     {
@@ -71,6 +71,11 @@ namespace Stegano.Analisys
         public override void ParametersReader(string parameters)
         {
             SetNumberOfBit(Convert.ToInt32(parameters));
+        }
+
+        public override string GetName()
+        {
+            return "Sequence bit frequence analysis";
         }
     }
 }
