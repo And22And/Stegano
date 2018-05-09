@@ -21,30 +21,30 @@ namespace Stegano.GUI
         private static string orderClass = "Stegano.Order.ModuleOrder";
         private static string positionClass = "Stegano.Position.ModulePosition";
         private static string writerClass = "Stegano.WriterReader.ModuleWriterReader";
-        private static string analysisClass = "Stegano.Analysis.AnalisysHistogram";
+        private static string analysisClass = "Stegano.Analysis.AnalysisUI";
         private List<string> blockNames;
         private List<string> orderNames;
         private List<string> positionNames;
         private List<string> writerNames;
         private List<string> analisysNames;
         private ModuleWriterReader writerReader = null;
-        private AnalisysHistogram histogram;
+        private AnalysisUI histogram;
         private static int cellToWrite;
 
         public MainForm()
         {
-            InitializeComponent();    
-            writerNames = new List<string>(Reflection.GetTypesNames(writerClass));
-            positionNames = new List<string>(Reflection.GetTypesNames(positionClass));
-            orderNames = new List<string>(Reflection.GetTypesNames(orderClass));
-            blockNames = new List<string>(Reflection.GetTypesNames(blockClass));
-            analisysNames = new List<string>(Reflection.GetTypesNames(analysisClass));
+            InitializeComponent();
+
+            writerNames = ClearList(new List<string>(Reflection.GetTypesNames(writerClass)));
+            positionNames = ClearList(new List<string>(Reflection.GetTypesNames(positionClass)));
+            orderNames = ClearList(new List<string>(Reflection.GetTypesNames(orderClass)));
+            blockNames = ClearList(new List<string>(Reflection.GetTypesNames(blockClass)));
+            analisysNames = ClearList(new List<string>(Reflection.GetTypesNames(analysisClass)));
 
             writerReader = (ModuleWriterReader)Reflection.CreateObjectByName(writerNames[0]);
             writerReader.SetPosition((ModulePosition)Reflection.CreateObjectByName(positionNames[0]));
             writerReader.GetPosition().SetOrder((ModuleOrder)Reflection.CreateObjectByName(orderNames[0]));
             writerReader.GetOrder().SetBlock((ModuleBlock)Reflection.CreateObjectByName(blockNames[0]));
-            histogram = (AnalisysHistogram)Reflection.CreateObjectByName(analisysNames[0]);
 
             setList(writerList, writerNames);
             setList(positionList, positionNames);
@@ -55,28 +55,34 @@ namespace Stegano.GUI
             showSpaceValues();
         }
 
+        private List<string> ClearList(List<string> names)
+        {
+            for (int i = 0; i < names.Count; i++)
+            {
+                UI item;
+                if (!Reflection.TypeByName(names[i]).IsAbstract && (item = (UI)Reflection.CreateObjectByName(names[i])).IsShown())
+                {
+                    if (item.GetName().Equals("None"))
+                    {
+                        string noneName = names[i];
+                        names.RemoveAt(i);
+                        names.Insert(0, noneName);
+                    }
+                }
+                else
+                {
+                    names.RemoveAt(i);
+                }
+            }
+            return names;
+        }
+
         private void setList(ComboBox box, List<string> names)
         {
             for (int i = 0; i < names.Count; i++)
             {
                 UI item = (UI)Reflection.CreateObjectByName(names[i]);
-                if (item.IsShown())
-                {
-                    if (!item.GetName().Equals("None"))
-                    {
-                        box.Items.Add(item.GetName());
-                    }
-                    else
-                    {
-                        box.Items.Insert(0, item.GetName());
-                        string noneName = names[i];
-                        names.RemoveAt(i);
-                        names.Insert(0, noneName);
-                    }
-                } else
-                {
-                    names.RemoveAt(i);
-                }
+                box.Items.Add(item.GetName());
             }
             box.SelectedIndex = 0;
         }
@@ -328,7 +334,7 @@ namespace Stegano.GUI
         private void analysisList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender;
-            histogram = (AnalisysHistogram)Reflection.CreateObjectByName(analisysNames[box.SelectedIndex]);
+            histogram = (AnalysisUI)Reflection.CreateObjectByName(analisysNames[box.SelectedIndex]);
             if (histogram.HasParameters())
             {
                 setParameters(analisysParameters, histogram.AllParameters());
@@ -357,18 +363,19 @@ namespace Stegano.GUI
             }
             else
             {
-                AnalisysHistogram hist = (AnalisysHistogram)histogram.Clone();
+                AnalysisUI hist = (AnalysisUI)histogram.Clone();
                 Thread newThread = new Thread(parametrs => this.AnalisysThread(hist));                
                 newThread.Start();
             }
         }
 
-        private void AnalisysThread(AnalisysHistogram hist)
+        private void AnalisysThread(AnalysisUI hist)
         {
-            SetAnalisysText("Analisys is started");
-            AnalisysForm form = new AnalisysForm(new Bitmap(container.Image), hist);
-            Application.Run(form);
-            SetAnalisysText("Analisys is over");
+            SetAnalisysText("Analysis is started");
+            AnalysisFormInterface form = (AnalysisFormInterface)Reflection.CreateObjectByName(hist.GetFormName());
+            form.SetAnalysisParameters(new Bitmap(container.Image), hist);
+            Application.Run((Form)form);
+            SetAnalisysText("Analysis is over");
         }
 
         private void SetAnalisysText(string text)

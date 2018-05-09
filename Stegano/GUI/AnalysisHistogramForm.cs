@@ -4,16 +4,18 @@ using Stegano.Analysis;
 
 namespace Stegano.GUI
 {
-    public partial class AnalisysForm : Form
+    public partial class AnalysisHistogramForm : Form, AnalysisFormInterface
     {
-        private Bitmap bitmap;
-        private AnalisysHistogram histogram;
+        private AnalysisHistogram histogram;
 
-        public AnalisysForm(Bitmap picture, AnalisysHistogram hist)
+        public AnalysisHistogramForm()
         {
             InitializeComponent();
-            histogram = hist;
-            bitmap = picture;
+        }
+
+        public void SetAnalysisParameters(Bitmap picture, AnalysisUI analysis)
+        {
+            histogram = (AnalysisHistogram)analysis;
             histogram.SetBitmap(picture);
             histogram.SetChart(analisisHistogram);
             histogram.Clear();

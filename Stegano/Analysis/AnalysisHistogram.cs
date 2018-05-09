@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
-using Stegano.GUI;
 
 namespace Stegano.Analysis
 {
-    public abstract class AnalisysHistogram : UI, ICloneable
+    public abstract class AnalysisHistogram : AnalysisUI
     {
         private Dictionary<string, List<Int32>> histogramData = new Dictionary<string, List<Int32>>();
         private List<string> series = new List<string>();
@@ -96,9 +95,9 @@ namespace Stegano.Analysis
 
         abstract public void SetSeries();
 
-        public object Clone()
+        public override string GetFormName()
         {
-            return this.MemberwiseClone();
+            return "Stegano.GUI.AnalysisHistogramForm";
         }
     }
 }

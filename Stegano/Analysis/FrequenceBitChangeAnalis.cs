@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Stegano.Analysis
 {
-    class FrequenceBitChangeAnalis : AnalisysHistogram
+    class FrequenceBitChangeAnalis : AnalysisHistogram
     {
         private string[] parametrs;
         private string parameter;

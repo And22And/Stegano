@@ -1,6 +1,6 @@
 ﻿namespace Stegano.GUI
 {
-    partial class AnalisysForm
+    partial class AnalysisHistogramForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.analisisHistogram = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.showButton = new System.Windows.Forms.Button();
             this.hideButton = new System.Windows.Forms.Button();
@@ -38,14 +38,14 @@
             // 
             // analisisHistogram
             // 
-            chartArea.Name = "ChartArea";
-            this.analisisHistogram.ChartAreas.Add(chartArea);
-            legend2.Name = "Legend1";
-            this.analisisHistogram.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea";
+            this.analisisHistogram.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.analisisHistogram.Legends.Add(legend1);
             this.analisisHistogram.Location = new System.Drawing.Point(0, 0);
             this.analisisHistogram.Name = "analisisHistogram";
             this.analisisHistogram.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            this.analisisHistogram.Size = new System.Drawing.Size(880, 559);
+            this.analisisHistogram.Size = new System.Drawing.Size(880, 560);
             this.analisisHistogram.TabIndex = 2;
             this.analisisHistogram.Text = "chart1";
             // 
@@ -69,15 +69,15 @@
             this.hideButton.UseVisualStyleBackColor = true;
             this.hideButton.Click += new System.EventHandler(this.hideButton_Click);
             // 
-            // AnalisysForm
+            // AnalisysHistogramForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 561);
+            this.ClientSize = new System.Drawing.Size(974, 561);
             this.Controls.Add(this.hideButton);
             this.Controls.Add(this.showButton);
             this.Controls.Add(this.analisisHistogram);
-            this.Name = "AnalisysForm";
+            this.Name = "AnalisysHistogramForm";
             this.Text = "Analisis";
             ((System.ComponentModel.ISupportInitialize)(this.analisisHistogram)).EndInit();
             this.ResumeLayout(false);
