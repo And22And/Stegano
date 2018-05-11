@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Stegano
 {
-    class Reflection
+    public class Reflection
     {
         public static object CreateObjectByName(string name)
         {

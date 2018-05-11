@@ -5,7 +5,7 @@ using Stegano.GUI;
 
 namespace Stegano.WriterReader
 {
-    class HideInColor : ModuleWriterReader
+    public class HideInColor : ModuleWriterReader
     {
         private int numberOfBit;
         private string hideColor;

@@ -3,13 +3,18 @@ using System.Drawing;
 
 namespace Stegano.Container
 {
-    class PixelPicture
+    public class PixelPicture
     {
-        public Bitmap image;
+        private Bitmap image;
 
         public PixelPicture(Bitmap image)
         {
             this.image = image;
+        }
+
+        public Bitmap GetPicture()
+        {
+            return image;
         }
 
         public int getCellNumber()

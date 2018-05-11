@@ -2,7 +2,7 @@
 
 namespace Stegano.Block
 {
-    class LineBlock : ModuleBlock
+    public class LineBlock : ModuleBlock
     {
         private int lineNumber;
         private string[] parameters = { "2", "3", "4", "5", "6"};

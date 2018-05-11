@@ -6,7 +6,7 @@ using Stegano.Container;
 
 namespace Stegano.Position
 {
-    abstract class ModulePosition : UI
+    public abstract class ModulePosition : UI
     {
         public ModuleOrder order;
         public int currentPosition;

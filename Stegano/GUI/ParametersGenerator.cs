@@ -2,7 +2,7 @@
 
 namespace Stegano.GUI
 {
-    class ParametersGenerator
+    public class ParametersGenerator
     {
         public static string[] ArrayCombination(string[][] parameters)
         {

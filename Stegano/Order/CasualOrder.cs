@@ -2,7 +2,7 @@
 
 namespace Stegano.Order
 {
-    class CasualOrder : ModuleOrder
+    public class CasualOrder : ModuleOrder
     {
         private string[][] parameters;
         private string corner;

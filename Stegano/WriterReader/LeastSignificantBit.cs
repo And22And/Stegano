@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Stegano.WriterReader
 {
-    class LeastSignificantBit : ModuleWriterReader
+    public class LeastSignificantBit : ModuleWriterReader
     {
         
         private int numberOfBit;

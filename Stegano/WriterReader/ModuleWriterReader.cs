@@ -8,7 +8,7 @@ using Stegano.Container;
 
 namespace Stegano.WriterReader
 {
-    abstract class ModuleWriterReader : UI
+    public abstract class ModuleWriterReader : UI
     {
         public ModulePosition position;
 

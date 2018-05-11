@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Stegano
 {
-    class BitByte
+    public class BitByte
     {
         public static int powerOfTwo(int n)
         {

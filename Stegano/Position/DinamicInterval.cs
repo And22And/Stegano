@@ -1,6 +1,6 @@
 ﻿namespace Stegano.Position
 {
-    class DinamicInterval : ModulePosition
+    public class DinamicInterval : ModulePosition
     {
         private int hole;
         private int[] holes = { 3, 1, 4, 2}; 

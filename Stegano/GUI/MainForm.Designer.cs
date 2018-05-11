@@ -34,7 +34,8 @@
             this.readBut = new System.Windows.Forms.Button();
             this.choseFileBut = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.clearImage = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.clearImageBut = new System.Windows.Forms.Button();
             this.chosenImageName = new System.Windows.Forms.TextBox();
             this.resultText = new System.Windows.Forms.RichTextBox();
             this.spaceLabel = new System.Windows.Forms.Label();
@@ -57,20 +58,19 @@
             this.BlockLabel = new System.Windows.Forms.Label();
             this.blockList = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.showPixels = new System.Windows.Forms.Button();
-            this.showPixelsParameters = new System.Windows.Forms.ComboBox();
-            this.showPixelsList = new System.Windows.Forms.ComboBox();
-            this.pixelContainer = new System.Windows.Forms.PictureBox();
-            this.analisysParameters = new System.Windows.Forms.ComboBox();
+            this.preanalysisBut = new System.Windows.Forms.Button();
+            this.preanalysisParameters = new System.Windows.Forms.ComboBox();
+            this.preanalysisList = new System.Windows.Forms.ComboBox();
+            this.preanalysisPicture = new System.Windows.Forms.PictureBox();
+            this.analysisParameters = new System.Windows.Forms.ComboBox();
             this.analisysText = new System.Windows.Forms.RichTextBox();
             this.analysisList = new System.Windows.Forms.ComboBox();
-            this.Analisys = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.AnalisysBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.container)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pixelContainer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.preanalysisPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // container
@@ -152,7 +152,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.clearImage);
+            this.groupBox1.Controls.Add(this.clearImageBut);
             this.groupBox1.Controls.Add(this.container);
             this.groupBox1.Controls.Add(this.chosenImageName);
             this.groupBox1.Controls.Add(this.choseFileBut);
@@ -172,15 +172,24 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             // 
-            // clearImage
+            // label2
             // 
-            this.clearImage.Location = new System.Drawing.Point(107, 248);
-            this.clearImage.Name = "clearImage";
-            this.clearImage.Size = new System.Drawing.Size(97, 23);
-            this.clearImage.TabIndex = 20;
-            this.clearImage.Text = "Clear image";
-            this.clearImage.UseVisualStyleBackColor = true;
-            this.clearImage.Click += new System.EventHandler(this.clearImage_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 289);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(36, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Image";
+            // 
+            // clearImageBut
+            // 
+            this.clearImageBut.Location = new System.Drawing.Point(107, 248);
+            this.clearImageBut.Name = "clearImageBut";
+            this.clearImageBut.Size = new System.Drawing.Size(97, 23);
+            this.clearImageBut.TabIndex = 20;
+            this.clearImageBut.Text = "Clear image";
+            this.clearImageBut.UseVisualStyleBackColor = true;
+            this.clearImageBut.Click += new System.EventHandler(this.clearImage_Click);
             // 
             // chosenImageName
             // 
@@ -408,14 +417,14 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.showPixels);
-            this.groupBox3.Controls.Add(this.showPixelsParameters);
-            this.groupBox3.Controls.Add(this.showPixelsList);
-            this.groupBox3.Controls.Add(this.pixelContainer);
-            this.groupBox3.Controls.Add(this.analisysParameters);
+            this.groupBox3.Controls.Add(this.preanalysisBut);
+            this.groupBox3.Controls.Add(this.preanalysisParameters);
+            this.groupBox3.Controls.Add(this.preanalysisList);
+            this.groupBox3.Controls.Add(this.preanalysisPicture);
+            this.groupBox3.Controls.Add(this.analysisParameters);
             this.groupBox3.Controls.Add(this.analisysText);
             this.groupBox3.Controls.Add(this.analysisList);
-            this.groupBox3.Controls.Add(this.Analisys);
+            this.groupBox3.Controls.Add(this.AnalisysBut);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
             this.groupBox3.Location = new System.Drawing.Point(638, 2);
@@ -424,52 +433,52 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             // 
-            // showPixels
+            // preanalysisBut
             // 
-            this.showPixels.Location = new System.Drawing.Point(319, 284);
-            this.showPixels.Name = "showPixels";
-            this.showPixels.Size = new System.Drawing.Size(75, 23);
-            this.showPixels.TabIndex = 24;
-            this.showPixels.Text = "Show";
-            this.showPixels.UseVisualStyleBackColor = true;
-            this.showPixels.Click += new System.EventHandler(this.showPixels_Click);
+            this.preanalysisBut.Location = new System.Drawing.Point(319, 284);
+            this.preanalysisBut.Name = "preanalysisBut";
+            this.preanalysisBut.Size = new System.Drawing.Size(75, 23);
+            this.preanalysisBut.TabIndex = 24;
+            this.preanalysisBut.Text = "Show";
+            this.preanalysisBut.UseVisualStyleBackColor = true;
+            this.preanalysisBut.Click += new System.EventHandler(this.preanalysis_Click);
             // 
-            // showPixelsParameters
+            // preanalysisParameters
             // 
-            this.showPixelsParameters.FormattingEnabled = true;
-            this.showPixelsParameters.Location = new System.Drawing.Point(183, 287);
-            this.showPixelsParameters.Name = "showPixelsParameters";
-            this.showPixelsParameters.Size = new System.Drawing.Size(130, 21);
-            this.showPixelsParameters.TabIndex = 23;
-            this.showPixelsParameters.SelectedIndexChanged += new System.EventHandler(this.showPixelsParameters_SelectedIndexChanged);
+            this.preanalysisParameters.FormattingEnabled = true;
+            this.preanalysisParameters.Location = new System.Drawing.Point(183, 287);
+            this.preanalysisParameters.Name = "preanalysisParameters";
+            this.preanalysisParameters.Size = new System.Drawing.Size(130, 21);
+            this.preanalysisParameters.TabIndex = 23;
+            this.preanalysisParameters.SelectedIndexChanged += new System.EventHandler(this.preanalysisParameters_SelectedIndexChanged);
             // 
-            // showPixelsList
+            // preanalysisList
             // 
-            this.showPixelsList.FormattingEnabled = true;
-            this.showPixelsList.Location = new System.Drawing.Point(6, 287);
-            this.showPixelsList.Name = "showPixelsList";
-            this.showPixelsList.Size = new System.Drawing.Size(171, 21);
-            this.showPixelsList.TabIndex = 22;
-            this.showPixelsList.SelectedIndexChanged += new System.EventHandler(this.showPixelsList_SelectedIndexChanged);
+            this.preanalysisList.FormattingEnabled = true;
+            this.preanalysisList.Location = new System.Drawing.Point(6, 287);
+            this.preanalysisList.Name = "preanalysisList";
+            this.preanalysisList.Size = new System.Drawing.Size(171, 21);
+            this.preanalysisList.TabIndex = 22;
+            this.preanalysisList.SelectedIndexChanged += new System.EventHandler(this.preanalysisList_SelectedIndexChanged);
             // 
-            // pixelContainer
+            // preanalysisPicture
             // 
-            this.pixelContainer.InitialImage = null;
-            this.pixelContainer.Location = new System.Drawing.Point(6, 13);
-            this.pixelContainer.Name = "pixelContainer";
-            this.pixelContainer.Size = new System.Drawing.Size(388, 229);
-            this.pixelContainer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pixelContainer.TabIndex = 21;
-            this.pixelContainer.TabStop = false;
+            this.preanalysisPicture.InitialImage = null;
+            this.preanalysisPicture.Location = new System.Drawing.Point(6, 13);
+            this.preanalysisPicture.Name = "preanalysisPicture";
+            this.preanalysisPicture.Size = new System.Drawing.Size(388, 229);
+            this.preanalysisPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.preanalysisPicture.TabIndex = 21;
+            this.preanalysisPicture.TabStop = false;
             // 
-            // analisysParameters
+            // analysisParameters
             // 
-            this.analisysParameters.FormattingEnabled = true;
-            this.analisysParameters.Location = new System.Drawing.Point(183, 326);
-            this.analisysParameters.Name = "analisysParameters";
-            this.analisysParameters.Size = new System.Drawing.Size(130, 21);
-            this.analisysParameters.TabIndex = 20;
-            this.analisysParameters.SelectedIndexChanged += new System.EventHandler(this.analisysParameters_SelectedIndexChanged);
+            this.analysisParameters.FormattingEnabled = true;
+            this.analysisParameters.Location = new System.Drawing.Point(183, 326);
+            this.analysisParameters.Name = "analysisParameters";
+            this.analysisParameters.Size = new System.Drawing.Size(130, 21);
+            this.analysisParameters.TabIndex = 20;
+            this.analysisParameters.SelectedIndexChanged += new System.EventHandler(this.analisysParameters_SelectedIndexChanged);
             // 
             // analisysText
             // 
@@ -493,24 +502,15 @@
             this.analysisList.TabIndex = 5;
             this.analysisList.SelectedIndexChanged += new System.EventHandler(this.analysisList_SelectedIndexChanged);
             // 
-            // Analisys
+            // AnalisysBut
             // 
-            this.Analisys.Location = new System.Drawing.Point(319, 324);
-            this.Analisys.Name = "Analisys";
-            this.Analisys.Size = new System.Drawing.Size(75, 23);
-            this.Analisys.TabIndex = 0;
-            this.Analisys.Text = "Analisys";
-            this.Analisys.UseVisualStyleBackColor = true;
-            this.Analisys.Click += new System.EventHandler(this.Analisys_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 289);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 13);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Image";
+            this.AnalisysBut.Location = new System.Drawing.Point(319, 324);
+            this.AnalisysBut.Name = "AnalisysBut";
+            this.AnalisysBut.Size = new System.Drawing.Size(75, 23);
+            this.AnalisysBut.TabIndex = 0;
+            this.AnalisysBut.Text = "Analysis";
+            this.AnalisysBut.UseVisualStyleBackColor = true;
+            this.AnalisysBut.Click += new System.EventHandler(this.Analisys_Click);
             // 
             // MainForm
             // 
@@ -525,7 +525,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pixelContainer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.preanalysisPicture)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -553,16 +553,16 @@
         private System.Windows.Forms.ComboBox orderParameter;
         private System.Windows.Forms.ComboBox blockParameter;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button Analisys;
+        private System.Windows.Forms.Button AnalisysBut;
         private System.Windows.Forms.ComboBox analysisList;
         private System.Windows.Forms.RichTextBox analisysText;
         private System.Windows.Forms.TextBox chosenImageName;
-        private System.Windows.Forms.ComboBox analisysParameters;
-        private System.Windows.Forms.PictureBox pixelContainer;
-        private System.Windows.Forms.Button clearImage;
-        private System.Windows.Forms.Button showPixels;
-        private System.Windows.Forms.ComboBox showPixelsParameters;
-        private System.Windows.Forms.ComboBox showPixelsList;
+        private System.Windows.Forms.ComboBox analysisParameters;
+        private System.Windows.Forms.PictureBox preanalysisPicture;
+        private System.Windows.Forms.Button clearImageBut;
+        private System.Windows.Forms.Button preanalysisBut;
+        private System.Windows.Forms.ComboBox preanalysisParameters;
+        private System.Windows.Forms.ComboBox preanalysisList;
         private System.Windows.Forms.Label label2;
     }
 }

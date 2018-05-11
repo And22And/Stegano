@@ -4,7 +4,7 @@ using Stegano.GUI;
 
 namespace Stegano.WriterReader
 {
-    class StairsLSB : ModuleWriterReader
+    public class StairsLSB : ModuleWriterReader
     {
 
         private string[] parameters = { "red", "green", "blue"};

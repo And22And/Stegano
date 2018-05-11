@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace Stegano.Order
 {
-    abstract class ModuleOrder : UI
+    public abstract class ModuleOrder : UI
     {
         public ModuleBlock block;
 

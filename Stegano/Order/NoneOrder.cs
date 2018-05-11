@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Stegano.Order
 {
-    class NoneOrder:CasualOrder
+    public class NoneOrder :CasualOrder
     {
         public NoneOrder()
         {

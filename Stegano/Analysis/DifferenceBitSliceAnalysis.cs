@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Stegano.Analysis
 {
-    class ReverseBitSliceAnalysis : AnalysisPicture
+    class DifferenceBitSliceAnalysis : AnalysisPicture
     {
         private string[] parameters = { "1", "2", "3", "4", "5", "6", "7", "8" };
         private int numberOfBit;
@@ -31,7 +31,6 @@ namespace Stegano.Analysis
         public override Bitmap CreateAnalysisPicture()
         {
             Bitmap analysisPicture = new Bitmap(GetPicture().Width, GetPicture().Height);
-            Color pixel;
             int power2 = BitByte.powerOfTwo(numberOfBit);
             for (int i = 0; i < analysisPicture.Width; i++)
             {

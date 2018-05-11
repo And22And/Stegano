@@ -2,7 +2,7 @@
 
 namespace Stegano.Order
 {
-    class SpiralOrder : ModuleOrder
+    public class SpiralOrder : ModuleOrder
     {
 
         private string[][] parameters;

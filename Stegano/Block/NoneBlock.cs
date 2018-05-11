@@ -1,6 +1,6 @@
 ﻿namespace Stegano.Block
 {
-    class NoneBlock : ModuleBlock
+    public class NoneBlock : ModuleBlock
     {
 
         public override int getWidth()

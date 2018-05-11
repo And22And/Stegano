@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Stegano.Container
 {
-    class HideFile
+    public class HideFile
     {
         public static BitArray ReadBitArray(string path)
         {

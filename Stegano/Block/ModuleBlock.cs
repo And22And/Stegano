@@ -5,7 +5,7 @@ using Stegano.Container;
 
 namespace Stegano.Block
 {
-    abstract class ModuleBlock : UI
+    public abstract class ModuleBlock : UI
     {
         public PixelPicture container;
         private int currentBlock = 0;

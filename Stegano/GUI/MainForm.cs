@@ -22,13 +22,16 @@ namespace Stegano.GUI
         private static string positionClass = "Stegano.Position.ModulePosition";
         private static string writerClass = "Stegano.WriterReader.ModuleWriterReader";
         private static string analysisClass = "Stegano.Analysis.AnalysisUI";
+        private static string preanalysisClass = "Stegano.Analysis.PixelShow";
         private List<string> blockNames;
         private List<string> orderNames;
         private List<string> positionNames;
         private List<string> writerNames;
-        private List<string> analisysNames;
+        private List<string> analysisNames;
+        private List<string> preanalysisNames;
         private ModuleWriterReader writerReader = null;
-        private AnalysisUI histogram;
+        private AnalysisUI analysis;
+        private PixelShow preanalysis;
         private static int cellToWrite;
 
         public MainForm()
@@ -39,7 +42,8 @@ namespace Stegano.GUI
             positionNames = ClearList(new List<string>(Reflection.GetTypesNames(positionClass)));
             orderNames = ClearList(new List<string>(Reflection.GetTypesNames(orderClass)));
             blockNames = ClearList(new List<string>(Reflection.GetTypesNames(blockClass)));
-            analisysNames = ClearList(new List<string>(Reflection.GetTypesNames(analysisClass)));
+            analysisNames = ClearList(new List<string>(Reflection.GetTypesNames(analysisClass)));
+            preanalysisNames = ClearList(new List<string>(Reflection.GetTypesNames(preanalysisClass)));
 
             writerReader = (ModuleWriterReader)Reflection.CreateObjectByName(writerNames[0]);
             writerReader.SetPosition((ModulePosition)Reflection.CreateObjectByName(positionNames[0]));
@@ -50,7 +54,8 @@ namespace Stegano.GUI
             setList(positionList, positionNames);
             setList(orderList, orderNames);
             setList(blockList, blockNames);
-            setList(analysisList, analisysNames);
+            setList(analysisList, analysisNames);
+            setList(preanalysisList, preanalysisNames);
 
             showSpaceValues();
         }
@@ -153,7 +158,7 @@ namespace Stegano.GUI
                 resultText.Text = "Writing is started";
                 FileInfo info = new FileInfo(chosenFileName.Text);
                 writerReader.WriteFile(info.Name, HideFile.ReadBitArray(info.FullName));
-                container.Image = new Bitmap(writerReader.GetContainer().image);
+                container.Image = new Bitmap(writerReader.GetContainer().GetPicture());
                 resultText.Text = "Writing is over";
             }
             catch(Exception e)
@@ -334,25 +339,25 @@ namespace Stegano.GUI
         private void analysisList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender;
-            histogram = (AnalysisUI)Reflection.CreateObjectByName(analisysNames[box.SelectedIndex]);
-            if (histogram.HasParameters())
+            analysis = (AnalysisUI)Reflection.CreateObjectByName(analysisNames[box.SelectedIndex]);
+            if (analysis.HasParameters())
             {
-                setParameters(analisysParameters, histogram.AllParameters());
-                histogram.ParametersReader(analisysParameters.SelectedItem.ToString());
-                analisysParameters.Enabled = true;
+                setParameters(analysisParameters, analysis.AllParameters());
+                analysis.ParametersReader(analysisParameters.SelectedItem.ToString());
+                analysisParameters.Enabled = true;
             }
             else
             {
-                analisysParameters.Items.Clear();
-                analisysParameters.Items.Add("");
-                analisysParameters.SelectedIndex = 0;
-                analisysParameters.Enabled = false;
+                analysisParameters.Items.Clear();
+                analysisParameters.Items.Add("");
+                analysisParameters.SelectedIndex = 0;
+                analysisParameters.Enabled = false;
             }
         }
 
         private void analisysParameters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectParameter(histogram, (ComboBox)sender);
+            SelectParameter(analysis, (ComboBox)sender);
         }
 
         private void Analisys_Click(object sender, EventArgs e)
@@ -363,7 +368,7 @@ namespace Stegano.GUI
             }
             else
             {
-                AnalysisUI hist = (AnalysisUI)histogram.Clone();
+                AnalysisUI hist = (AnalysisUI)analysis.Clone();
                 Thread newThread = new Thread(parametrs => this.AnalisysThread(hist));                
                 newThread.Start();
             }
@@ -393,22 +398,70 @@ namespace Stegano.GUI
 
         private void clearImage_Click(object sender, EventArgs e)
         {
-
+            ShowMyImage(chosenImageName.Text);
         }
 
-        private void showPixels_Click(object sender, EventArgs e)
+        private void preanalysis_Click(object sender, EventArgs e)
         {
-
+            if (!File.Exists(chosenFileName.Text))
+            {
+                analisysText.Text = "File does not exist";
+            }
+            else if (container.Image == null)
+            {
+                analisysText.Text = "Picture is not set";
+            }
+            else if (showSpaceValues())
+            {
+                Preanalysis();
+            }
+            else
+            {
+                analisysText.Text = "Chosen modules and image is not enough to contain file";
+            }
         }
 
-        private void showPixelsParameters_SelectedIndexChanged(object sender, EventArgs e)
+        private void Preanalysis()
         {
-
+            try
+            {
+                analisysText.Text = "Preanalysis is started";
+                FileInfo info = new FileInfo(chosenFileName.Text);
+                preanalysis.SetWriterReader(writerReader);
+                preanalysis.WritePicture(info.Name, HideFile.ReadBitArray(info.FullName));
+                preanalysisPicture.Image = new Bitmap(preanalysis.GetPicture().GetPicture());
+                analisysText.Text = "Preanalysis is over";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                analisysText.Text = "Error during preanalysis";
+                writerReader.GetBlock().SetContainer(new PixelPicture(new Bitmap(container.Image)));
+            }
         }
 
-        private void showPixelsList_SelectedIndexChanged(object sender, EventArgs e)
+        private void preanalysisParameters_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SelectParameter(preanalysis, (ComboBox)sender);
+        }
 
+        private void preanalysisList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender;
+            preanalysis = (PixelShow)Reflection.CreateObjectByName(preanalysisNames[box.SelectedIndex]);
+            if (preanalysis.HasParameters())
+            {
+                setParameters(preanalysisParameters, preanalysis.AllParameters());
+                preanalysis.ParametersReader(preanalysisParameters.SelectedItem.ToString());
+                preanalysisParameters.Enabled = true;
+            }
+            else
+            {
+                preanalysisParameters.Items.Clear();
+                preanalysisParameters.Items.Add("");
+                preanalysisParameters.SelectedIndex = 0;
+                preanalysisParameters.Enabled = false;
+            }
         }
     }
 

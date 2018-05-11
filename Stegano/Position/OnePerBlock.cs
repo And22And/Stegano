@@ -1,6 +1,6 @@
 ﻿namespace Stegano.Position
 {
-    class OnePerBlock : ModulePosition
+    public class OnePerBlock : ModulePosition
     {
         private int nextPos;
 

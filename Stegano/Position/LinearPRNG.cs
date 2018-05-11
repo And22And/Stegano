@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stegano.Position
 {
-    class LinearPRNG : ModulePosition
+    public class LinearPRNG : ModulePosition
     {
         private int a;
         private int b;

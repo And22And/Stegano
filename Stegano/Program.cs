@@ -4,7 +4,7 @@ using Stegano.GUI;
 
 namespace Stegano
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// Главная точка входа для приложения.
