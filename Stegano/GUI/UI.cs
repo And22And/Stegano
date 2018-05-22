@@ -6,7 +6,7 @@ namespace Stegano.GUI
     {
         public virtual string HintString()
         {
-            return "This does not require any parameters";
+            return "This module does not require any parameters";
         }
 
         public virtual bool HasParameters()

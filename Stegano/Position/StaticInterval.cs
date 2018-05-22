@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Stegano.Position
 {
     public class StaticInterval : ModulePosition

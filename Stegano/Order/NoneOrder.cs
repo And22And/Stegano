@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Stegano.Order
+﻿namespace Stegano.Order
 {
     public class NoneOrder :CasualOrder
     {

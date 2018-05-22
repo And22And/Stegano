@@ -294,6 +294,7 @@ namespace Stegano.GUI
             {
                 setParameters(parameters, gui.AllParameters());
                 gui.ParametersReader(parameters.SelectedItem.ToString());
+                parameters.SelectedIndex = 0;
                 hint.Text = gui.HintString();
                 parameters.Enabled = true;
             }

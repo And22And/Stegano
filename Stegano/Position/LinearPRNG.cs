@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Stegano.Position
 {
     public class LinearPRNG : ModulePosition
@@ -34,23 +35,29 @@ namespace Stegano.Position
             return currentPosition;
         }
 
+        public override void AfterChange()
+        {
+            base.AfterChange();
+            ToBegin();
+        }
+
         public override void ToBegin()
         {
             currentPosition = blockSize / par1 + blockSize / par2 - blockSize / par3;
             b = currentPosition % 2 == 0 ? currentPosition + 1 : currentPosition;
-            while (gcd(b, blockSize) != 1)
+            while (GCD(b, blockSize) != 1)
             {
                 b += 2;
             }
             if (blockSize != GetBlock().getBlockSize()) {
                 blockSize = GetBlock().getBlockSize();
-                a = genA(blockSize);                
+                a = GenA(blockSize);                
             }
             cur = 0;
             currentPosition = blockSize / 2;
         }
 
-        int gcd(int a, int b)
+        int GCD(int a, int b)
         {
             if (a == 0) return b;
             while (b != 0)
@@ -62,7 +69,7 @@ namespace Stegano.Position
             return a;
         }
 
-        int genA(int m)
+        int GenA(int m)
         {            
             int i = 2, a = 1;
             if (m % 4 == 0)

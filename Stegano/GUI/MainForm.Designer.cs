@@ -86,7 +86,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 329);
+            this.label1.Location = new System.Drawing.Point(11, 301);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 13);
             this.label1.TabIndex = 1;
@@ -94,14 +94,14 @@
             // 
             // chosenFileName
             // 
-            this.chosenFileName.Location = new System.Drawing.Point(68, 322);
+            this.chosenFileName.Location = new System.Drawing.Point(72, 294);
             this.chosenFileName.Name = "chosenFileName";
             this.chosenFileName.Size = new System.Drawing.Size(239, 20);
             this.chosenFileName.TabIndex = 2;
             // 
             // choseImageBut
             // 
-            this.choseImageBut.Location = new System.Drawing.Point(310, 287);
+            this.choseImageBut.Location = new System.Drawing.Point(314, 257);
             this.choseImageBut.Name = "choseImageBut";
             this.choseImageBut.Size = new System.Drawing.Size(84, 23);
             this.choseImageBut.TabIndex = 3;
@@ -111,7 +111,7 @@
             // 
             // saveImageBut
             // 
-            this.saveImageBut.Location = new System.Drawing.Point(10, 248);
+            this.saveImageBut.Location = new System.Drawing.Point(10, 326);
             this.saveImageBut.Name = "saveImageBut";
             this.saveImageBut.Size = new System.Drawing.Size(91, 23);
             this.saveImageBut.TabIndex = 4;
@@ -121,7 +121,7 @@
             // 
             // writeBut
             // 
-            this.writeBut.Location = new System.Drawing.Point(210, 248);
+            this.writeBut.Location = new System.Drawing.Point(210, 326);
             this.writeBut.Name = "writeBut";
             this.writeBut.Size = new System.Drawing.Size(88, 23);
             this.writeBut.TabIndex = 5;
@@ -131,7 +131,7 @@
             // 
             // readBut
             // 
-            this.readBut.Location = new System.Drawing.Point(304, 248);
+            this.readBut.Location = new System.Drawing.Point(304, 326);
             this.readBut.Name = "readBut";
             this.readBut.Size = new System.Drawing.Size(94, 23);
             this.readBut.TabIndex = 6;
@@ -141,7 +141,7 @@
             // 
             // choseFileBut
             // 
-            this.choseFileBut.Location = new System.Drawing.Point(313, 322);
+            this.choseFileBut.Location = new System.Drawing.Point(314, 292);
             this.choseFileBut.Name = "choseFileBut";
             this.choseFileBut.Size = new System.Drawing.Size(84, 23);
             this.choseFileBut.TabIndex = 7;
@@ -175,7 +175,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 289);
+            this.label2.Location = new System.Drawing.Point(11, 261);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 21;
@@ -183,7 +183,7 @@
             // 
             // clearImageBut
             // 
-            this.clearImageBut.Location = new System.Drawing.Point(107, 248);
+            this.clearImageBut.Location = new System.Drawing.Point(107, 326);
             this.clearImageBut.Name = "clearImageBut";
             this.clearImageBut.Size = new System.Drawing.Size(97, 23);
             this.clearImageBut.TabIndex = 20;
@@ -193,7 +193,7 @@
             // 
             // chosenImageName
             // 
-            this.chosenImageName.Location = new System.Drawing.Point(68, 287);
+            this.chosenImageName.Location = new System.Drawing.Point(72, 259);
             this.chosenImageName.Name = "chosenImageName";
             this.chosenImageName.Size = new System.Drawing.Size(239, 20);
             this.chosenImageName.TabIndex = 19;
@@ -435,7 +435,7 @@
             // 
             // preanalysisBut
             // 
-            this.preanalysisBut.Location = new System.Drawing.Point(319, 284);
+            this.preanalysisBut.Location = new System.Drawing.Point(319, 254);
             this.preanalysisBut.Name = "preanalysisBut";
             this.preanalysisBut.Size = new System.Drawing.Size(75, 23);
             this.preanalysisBut.TabIndex = 24;
@@ -446,7 +446,7 @@
             // preanalysisParameters
             // 
             this.preanalysisParameters.FormattingEnabled = true;
-            this.preanalysisParameters.Location = new System.Drawing.Point(183, 287);
+            this.preanalysisParameters.Location = new System.Drawing.Point(183, 257);
             this.preanalysisParameters.Name = "preanalysisParameters";
             this.preanalysisParameters.Size = new System.Drawing.Size(130, 21);
             this.preanalysisParameters.TabIndex = 23;
@@ -455,7 +455,7 @@
             // preanalysisList
             // 
             this.preanalysisList.FormattingEnabled = true;
-            this.preanalysisList.Location = new System.Drawing.Point(6, 287);
+            this.preanalysisList.Location = new System.Drawing.Point(6, 257);
             this.preanalysisList.Name = "preanalysisList";
             this.preanalysisList.Size = new System.Drawing.Size(171, 21);
             this.preanalysisList.TabIndex = 22;
@@ -474,7 +474,7 @@
             // analysisParameters
             // 
             this.analysisParameters.FormattingEnabled = true;
-            this.analysisParameters.Location = new System.Drawing.Point(183, 326);
+            this.analysisParameters.Location = new System.Drawing.Point(183, 296);
             this.analysisParameters.Name = "analysisParameters";
             this.analysisParameters.Size = new System.Drawing.Size(130, 21);
             this.analysisParameters.TabIndex = 20;
@@ -496,7 +496,7 @@
             // analysisList
             // 
             this.analysisList.FormattingEnabled = true;
-            this.analysisList.Location = new System.Drawing.Point(6, 326);
+            this.analysisList.Location = new System.Drawing.Point(6, 296);
             this.analysisList.Name = "analysisList";
             this.analysisList.Size = new System.Drawing.Size(171, 21);
             this.analysisList.TabIndex = 5;
@@ -504,7 +504,7 @@
             // 
             // AnalisysBut
             // 
-            this.AnalisysBut.Location = new System.Drawing.Point(319, 324);
+            this.AnalisysBut.Location = new System.Drawing.Point(319, 294);
             this.AnalisysBut.Name = "AnalisysBut";
             this.AnalisysBut.Size = new System.Drawing.Size(75, 23);
             this.AnalisysBut.TabIndex = 0;
